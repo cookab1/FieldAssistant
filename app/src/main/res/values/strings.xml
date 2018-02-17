@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">Field Assistant</string>
+
+	<string name="app_name">Field Assistant</string>
+	<string name="default_recipient">"Default Recipient"</string>
+	<string name="send_message">SEND</string>
+	<string name="use_dictation">Dictate</string>
+	<string name="use_keyboard">Keyboard</string>
+	<string name="use_camera">Camera</string>
+	<string name="from_photos">Photos</string>
+
+
+	<string name="Test_Text">
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
+		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </string>
+	<string name="Test_Date">2/14/2018</string>
+	<string name="Test_Status">Pending...</string>
+	<string name="Test_Location">Boone, NC</string>
+	<string name="Test_Recipient">Ben Kenobi</string>
+	<string name="Test_Title">Field Title</string>
+
 </resources>
+
+
+	<!--<string name=""></string>-->
