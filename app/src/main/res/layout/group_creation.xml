@@ -29,30 +29,43 @@
             android:text="@string/group_members_label" />
 
         <EditText
+            android:id="@+id/new_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/member_name_hint"/>
+
+        <EditText
             android:id="@+id/new_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/member_email_hint"/>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/add_member_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_member"/>
 
+    </LinearLayout>
 
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <android.support.v7.app.AlertController.RecycleListView
+            android:id="@+id/field_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.app.AlertController.RecycleListView>
+
         <Button
             android:id="@+id/crime_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:text="@string/delete_group" />
-
-        <android.support.v7.app.AlertController.RecycleListView
-            android:id="@+id/field_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.app.AlertController.RecycleListView>
+            android:text="@string/create_group"
+            />
     </FrameLayout>
 
 </LinearLayout>
