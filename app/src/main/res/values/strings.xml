@@ -9,24 +9,25 @@
 	<string name="from_photos">Photos</string>
 
 
+	<string name="group_name_label">Group Name</string>
+	<string name="group_name_hint">Enter Name</string>
+	<string name="group_members_label">Group Members</string>
+	<string name="member_email_hint">Add e-mail</string>
+	<string name="delete_group">Delete Group</string>
+
+
 	<string name="Test_Text">
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text
-		Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text </string>
-	<string name="Test_Date">2/14/2018</string>
+		I am concerned about my apprentice. He shows signs of anger. On top of that, his skill continues to grow. Each lesson, he becomes more of a threat to the Jedi. </string>
+	<string name="Test_Date">6/14/3098</string>
 	<string name="Test_Status">Pending...</string>
-	<string name="Test_Location">Boone, NC</string>
-	<string name="Test_Recipient">Ben Kenobi</string>
+	<string name="Test_Location">Jedi Temple, Naboo</string>
+	<string name="Test_Recipient">Obiwan Kenobi</string>
 	<string name="Test_Title">Field Title</string>
+	<string name="Test_Group_Name">High Council</string>
+	<string name="Test_Group_Number">24</string>
+	<string name="Test_Group_Member0">Qui-Gon Jinn</string>
+	<string name="Test_Group_Member1">Mace Windu</string>
 
 </resources>
-
 
 	<!--<string name=""></string>-->
