@@ -1,4 +1,5 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,10 +14,9 @@
 		android:layout_marginRight="8dp"
 		android:layout_marginTop="8dp"
 		android:drawableTop="@android:drawable/ic_menu_camera"
-		android:paddingTop="90sp"
+		android:paddingTop="70sp"
 		android:drawablePadding="-60sp"
 		android:textSize="20sp"
-		android:src="@android:drawable/ic_menu_camera"
 		android:text="@string/use_camera"
 		app:layout_constraintBottom_toTopOf="@+id/field_photos"
 		app:layout_constraintHorizontal_bias="0.0"
@@ -33,6 +33,9 @@
 		android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp"
 		android:layout_marginTop="8dp"
+		android:drawableTop="@android:drawable/ic_menu_camera"
+		android:paddingTop="70sp"
+		android:drawablePadding="-60sp"
 		android:text="@string/from_photos"
 		android:textAlignment="center"
 		android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
@@ -42,6 +45,5 @@
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintRight_toRightOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/field_camera" />
-
 
 </android.support.constraint.ConstraintLayout>
