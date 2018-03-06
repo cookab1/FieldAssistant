@@ -1,5 +1,6 @@
 package com.example.andyr.fieldassistant
 
+import android.location.Location
 import android.media.Image
 import java.util.UUID;
 import java.util.Date;
@@ -11,9 +12,14 @@ class Report {
     private var mId: UUID? = UUID.randomUUID()
     private var mDate: Date? = null
     private var mSent: Boolean = false
-    private var mRecipient: String? = null
+    private var mLocation: Location? = null
+    private var mRecipient: Group? = null
     private var mImage: String? = null
     private var mMessage: String? = null
+
+    constructor(uuid: UUID) {
+        mId = uuid
+    }
 
     fun setId(id: UUID?) {
         mId = id
@@ -29,10 +35,10 @@ class Report {
         return mDate
     }
 
-    fun setRecipient(recipient: String?) {
+    fun setRecipient(recipient: Group?) {
         mRecipient = recipient
     }
-    fun getRecipient(): String? {
+    fun getRecipient(): Group? {
         return mRecipient
     }
 
@@ -43,6 +49,10 @@ class Report {
         return mImage
     }
 
+    fun getImageFileName(): String? {
+        return "IMG_" + getId().toString() + ".jpg"
+    }
+
     fun setMessage(message: String?) {
         mMessage = message
     }
@@ -50,12 +60,18 @@ class Report {
         return mMessage
     }
 
-    fun notSent() {
-        mSent = false
+    fun setLocation(location: Location?) {
+        mLocation = location
     }
-    fun sent() {
-        mSent = true
+
+    fun getLocation() : Location? {
+        return mLocation
     }
+
+    fun setSent(sent: Boolean) {
+        mSent = sent
+    }
+
     fun ifSent(): Boolean {
         return mSent
     }
