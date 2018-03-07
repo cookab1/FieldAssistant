@@ -6,7 +6,7 @@
 	android:layout_margin="16dp"
 	android:orientation="vertical">
 
-	<ImageButton
+	<ImageView
 		android:id="@+id/field_image"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
