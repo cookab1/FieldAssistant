@@ -12,9 +12,7 @@ import java.util.*
 /**
  * Created by andyr on 3/6/2018.
  */
-class ReportCurserWrapper : CursorWrapper {
-    
-    constructor(cursor: Cursor) : super(cursor)
+class ReportCursorWrapper(cursor: Cursor?) : CursorWrapper(cursor) {
 
     fun getReport(): Report {
         val uuidString = getString(getColumnIndex(ReportTable.Cols.UUID))
@@ -22,7 +20,6 @@ class ReportCurserWrapper : CursorWrapper {
         val date = getLong(getColumnIndex(ReportTable.Cols.DATE))
         val message = getString(getColumnIndex(ReportTable.Cols.MESSAGE))
         val location = getString(getColumnIndex(ReportTable.Cols.LOCATION))
-        val image = getString(getColumnIndex(ReportTable.Cols.IMAGE))
         val recipient = getString(getColumnIndex(ReportTable.Cols.RECIPIENT))
 
         val report = Report(UUID.fromString(uuidString))
@@ -30,7 +27,6 @@ class ReportCurserWrapper : CursorWrapper {
         report.setLocation(Location(location))
         report.setMessage(message)
         report.setSent(isSent != 0)
-        report.setImage(image)
         report.setRecipient(Group(recipient))
 
         return report

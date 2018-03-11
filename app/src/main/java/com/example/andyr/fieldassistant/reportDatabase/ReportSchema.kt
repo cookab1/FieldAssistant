@@ -13,7 +13,6 @@ class ReportSchema {
             val DATE = "date"
             val SENT = "sent"
             val MESSAGE = "message"
-            val IMAGE = "image"
             val RECIPIENT = "recipient"
         }
     }

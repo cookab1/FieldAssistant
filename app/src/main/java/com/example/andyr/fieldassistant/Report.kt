@@ -9,22 +9,26 @@ import java.util.Date;
  * Created by cookab1 on 2/21/2018.
  */
 class Report {
-    private var mId: UUID? = UUID.randomUUID()
+    private var mId: UUID
     private var mDate: Date? = null
     private var mSent: Boolean = false
     private var mLocation: Location? = null
     private var mRecipient: Group? = null
     private var mImage: String? = null
-    private var mMessage: String? = null
+    lateinit private var mMessage: String
+
+    constructor() {
+        mId = UUID.randomUUID()
+    }
 
     constructor(uuid: UUID) {
         mId = uuid
     }
 
-    fun setId(id: UUID?) {
+    fun setId(id: UUID) {
         mId = id
     }
-    fun getId(): UUID? {
+    fun getId(): UUID {
         return mId
     }
 
@@ -42,21 +46,14 @@ class Report {
         return mRecipient
     }
 
-    fun setImage(image: String?) {
-        mImage = image
-    }
-    fun getImage(): String? {
-        return mImage
-    }
-
-    fun getImageFileName(): String? {
+    fun getImageFileName(): String {
         return "IMG_" + getId().toString() + ".jpg"
     }
 
-    fun setMessage(message: String?) {
+    fun setMessage(message: String) {
         mMessage = message
     }
-    fun getMessage(): String? {
+    fun getMessage(): String {
         return mMessage
     }
 
