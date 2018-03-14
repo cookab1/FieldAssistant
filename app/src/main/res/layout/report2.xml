@@ -5,7 +5,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical">
 
-	<ImageView
+	<ImageButton
 		android:id="@+id/field_image"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
@@ -39,9 +39,9 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:layout_marginTop="8dp"
-			android:drawableTop="@android:drawable/ic_menu_camera"
+			android:drawableTop="@drawable/microphone"
 			android:paddingTop="30sp"
-			android:drawablePadding="-20sp"
+			android:drawablePadding="-5sp"
 			android:textSize="17sp"
 			android:text="@string/use_dictation"
 			app:layout_constraintBottom_toTopOf="@id/type_message"
@@ -56,9 +56,9 @@
 			android:layout_height="0dp"
 			android:layout_marginBottom="8dp"
 			android:layout_marginTop="8dp"
-			android:drawableTop="@android:drawable/ic_menu_camera"
-			android:paddingTop="15sp"
-			android:drawablePadding="-20sp"
+			android:drawableTop="@drawable/keyboard"
+			android:paddingTop="30sp"
+			android:drawablePadding="-10sp"
 			android:textSize="17sp"
 			android:text="@string/use_keyboard"
 			app:layout_constraintBottom_toBottomOf="parent"
