@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import kotlinx.android.synthetic.main.report3.*
+import android.text.Editable
+import android.text.TextWatcher
+
+
 
 
 /**
@@ -24,6 +28,21 @@ class Report3Activity : AppCompatActivity() {
         keyboardInit(intent.extras.getInt("keyboard_mode"));
 
         send_message.setOnClickListener { send() }
+        field_message_3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                    s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(
+                    s: CharSequence, start: Int, before: Int, count: Int) {
+                    report.setMessage(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
     }
 
     private fun send() {
@@ -35,23 +54,27 @@ class Report3Activity : AppCompatActivity() {
         intent = Intent.createChooser(intent, getString(R.string.send_report))
         startActivity(intent)
 
-        intent = Intent(this, Report1Activity::class.java)
-        startActivity(intent)
+        //intent = Intent(this, Report1Activity::class.java)
+        //startActivity(intent)
     }
 
     private fun getReport(): String {
-        
+
+        var message = report.getMessage()
+
+        return message
+        /*
         val dateFormat = "EEE, MMM dd"
         val dateString = DateFormat.format(dateFormat, report.getDate()).toString()
 
-        var message = report.getMessage()
         if (suspect == null) {
             suspect = getString(R.string.crime_report_no_suspect)
         } else {
             suspect = getString(R.string.crime_report_suspect, suspect)
         }
 
-        return getString(R.string.report, report.getLocation(), dateString, solvedString, suspect)
+        return getString(R.string.report, message, report.getLocation(), dateString)
+        */
     }
 
     private fun keyboardInit(code: Int) {
