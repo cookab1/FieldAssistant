@@ -23,13 +23,14 @@ class Report2Activity : AppCompatActivity() {
     lateinit var image: Bitmap
     private val TAKE_PHOTO_REQUEST_CODE = 1
     private val IMAGE_GALLERY_REQUEST_CODE = 2
+    private val TYPE_CODE = 0;
+    private val DICTATE_CODE = 1;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.report2)
 
-        //var image: Bundle = intent.extras
         field_image.setImageBitmap(BitmapSender.instance.getBitmap())
 
         dictate_message.setOnClickListener { dictate() }
@@ -57,11 +58,13 @@ class Report2Activity : AppCompatActivity() {
 
     private fun dictate() {
         val intent = Intent(this, Report3Activity::class.java)
+        intent.putExtra("keyboard_mode", DICTATE_CODE);
         startActivity(intent)
     }
 
     private fun type() {
         val intent = Intent(this, Report3Activity::class.java)
+        intent.putExtra("keyboard_mode", TYPE_CODE);
         startActivity(intent)
     }
 

@@ -11,10 +11,16 @@ import kotlinx.android.synthetic.main.report3.*
  */
 class Report3Activity : AppCompatActivity() {
 
+    private val TYPE_CODE = 0;
+    private val DICTATE_CODE = 1;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
+
+        keyboardInit(intent.extras.getInt("keyboard_mode"));
+
         send_message.setOnClickListener { send() }
     }
 
@@ -22,4 +28,15 @@ class Report3Activity : AppCompatActivity() {
         val intent = Intent(this, Report1Activity::class.java)
         startActivity(intent)
     }
+
+    private fun keyboardInit(code: Int) {
+
+        //open keyboard automatically if type
+        if(code == TYPE_CODE) {
+            field_message_3.performClick();
+
+            //open keyboard then enable dictation automatically if dictate
+        } else if(code == DICTATE_CODE) {
+
+        }}
 }
