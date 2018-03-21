@@ -34,7 +34,8 @@ class Report1Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //photoFile = ReportManager.get(this)!!.getPhotoFile(report)
+        //setHasOptionsMenu(true); //this may require it be in a Fragment
+        photoFile = ReportManager.get.getPhotoFile(report)
 
         setContentView(R.layout.report1)
 

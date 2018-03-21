@@ -92,7 +92,6 @@ class Report2Activity : AppCompatActivity() {
                 image = data!!.getExtras().get("data") as Bitmap
                 BitmapSender.instance.setBitmap(image)
                 updateImage()
-                //field_image.setImageBitmap(image)
             } else {
                 val intent = Intent(this, Report3Activity::class.java)
                 startActivity(intent)

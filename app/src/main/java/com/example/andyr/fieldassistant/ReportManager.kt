@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Bitmap
 import com.example.andyr.fieldassistant.reportDatabase.ReportCursorWrapper
 import com.example.andyr.fieldassistant.reportDatabase.ReportDatabaseHelper
 import com.example.andyr.fieldassistant.reportDatabase.ReportSchema
@@ -15,23 +16,20 @@ import kotlin.collections.ArrayList
 /**
  * Created by andyr on 3/6/2018.
  */
-class ReportManager() {
+public class ReportManager private constructor() {
 
-
-    private var sReportManager: ReportManager? = null
     private var mContext: Context? = null
     private var mDatabase: SQLiteDatabase? = null
+
+    private object Holder { val GET = ReportManager() }
+
+    companion object {
+        val get: ReportManager by lazy { Holder.GET }
+    }
 
     constructor(context: Context) : this() {
         mContext = context.getApplicationContext()
         mDatabase = ReportDatabaseHelper(mContext).getWritableDatabase()
-    }
-
-    fun get(context: Context): ReportManager? {
-        if (sReportManager == null) {
-            sReportManager = ReportManager(context)
-        }
-        return sReportManager
     }
 
     fun addReport(report: Report?) {
