@@ -45,7 +45,6 @@ class Report3Activity : AppCompatActivity() {
         //intent = Intent(this, Report1Activity::class.java)
         //startActivity(intent)
     }
-
     private fun getReport(): String {
 
         var message = report.getMessage()
