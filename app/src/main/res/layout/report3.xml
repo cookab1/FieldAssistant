@@ -56,6 +56,7 @@
 			android:layout_marginTop="8dp"
 			android:prompt="@string/default_recipient"
 			android:hint="@string/email_hint"
+			android:singleLine="true"
 			app:layout_constraintBottom_toTopOf="@id/send_message"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"

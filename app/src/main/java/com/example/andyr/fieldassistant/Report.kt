@@ -13,9 +13,9 @@ class Report {
     private var mSent: Boolean = false
     private var mLocation: Location? = null
     private var mRecipient: Group? = null
-    private lateinit var mSingleRecipient: String
+    private var mSingleRecipient: String? = null
     private var mImage: String? = null
-    private var mMessage: String = ""
+    private var mMessage: String? = null
 
     constructor() {
         mId = UUID.randomUUID()
@@ -46,7 +46,7 @@ class Report {
     fun setRecipient(recipient: Group?) {
         mRecipient = recipient
     }
-    fun getRecipient(): String {
+    fun getRecipient(): String? {
         return mSingleRecipient
     }
 
@@ -57,7 +57,7 @@ class Report {
     fun setMessage(message: String) {
         mMessage = message
     }
-    fun getMessage(): String {
+    fun getMessage(): String? {
         return mMessage
     }
 

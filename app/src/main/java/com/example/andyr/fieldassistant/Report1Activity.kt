@@ -75,6 +75,7 @@ class Report1Activity : AppCompatActivity() {
 
         intent = Intent(this, Report3Activity::class.java)
 
+        //This line should be active if Report 2 is active
         //intent.putExtra("requestCode", requestCode)
 
         startActivity(intent)
