@@ -23,30 +23,18 @@ class Report3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
+        report = Report()
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
+        messageListener()
+        emailListener()
 
-        keyboardInit(intent.extras.getInt("keyboard_mode"));
+        //keyboardInit(intent.extras.getInt("keyboard_mode"));
 
         send_message.setOnClickListener { send() }
-        field_message_3.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                    s: CharSequence, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(
-                    s: CharSequence, start: Int, before: Int, count: Int) {
-                    report.setMessage(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable) {
-
-            }
-        })
     }
 
     private fun send() {
-        var emailList = arrayOf("andyrock.cook@gmail.com")
+        var emailList = arrayOf(report.getRecipient())
         var intent: Intent = Intent(Intent.ACTION_SEND)
         intent.type = "message/rfc822"
         intent.putExtra(Intent.EXTRA_EMAIL, emailList)
@@ -61,6 +49,8 @@ class Report3Activity : AppCompatActivity() {
     private fun getReport(): String {
 
         var message = report.getMessage()
+        if(message == null)
+            return "no text"
 
         return message
         /*
@@ -89,4 +79,38 @@ class Report3Activity : AppCompatActivity() {
         }
     }
 
+    fun messageListener() {
+        field_message_3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                    s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(
+                    s: CharSequence, start: Int, before: Int, count: Int) {
+                report.setMessage(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
+    }
+
+    fun emailListener() {
+        choose_recipient.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                    s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(
+                    s: CharSequence, start: Int, before: Int, count: Int) {
+                    report.setRecipient(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })}
 }

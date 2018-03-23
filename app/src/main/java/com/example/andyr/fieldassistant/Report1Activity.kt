@@ -35,7 +35,7 @@ class Report1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setHasOptionsMenu(true); //this may require it be in a Fragment
-        photoFile = ReportManager.get.getPhotoFile(report)
+        //photoFile = ReportManager.get.getPhotoFile(report)
 
         setContentView(R.layout.report1)
 
@@ -73,9 +73,9 @@ class Report1Activity : AppCompatActivity() {
 
         //Use requestCode to identify which action was taken
 
-        intent = Intent(this, Report2Activity::class.java)
+        intent = Intent(this, Report3Activity::class.java)
 
-        intent.putExtra("requestCode", requestCode)
+        //intent.putExtra("requestCode", requestCode)
 
         startActivity(intent)
     }
