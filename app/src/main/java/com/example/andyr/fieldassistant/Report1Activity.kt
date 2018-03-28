@@ -17,16 +17,18 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.report1.*
 import java.io.File
 import java.io.FileNotFoundException
+import java.io.IOException
 import java.io.InputStream
+import java.text.SimpleDateFormat
 
 
 class Report1Activity : AppCompatActivity() {
 
     val APP_TAG = "FieldAssistant"
     val CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034
-    var photoFileName = null
-    var photoFile: File? = null
     var report: Report = Report()
+    var photoFile: File? = null
+    lateinit var photoPath: String
     lateinit var image: Bitmap
     private val TAKE_PHOTO_REQUEST_CODE = 1
     private val IMAGE_GALLERY_REQUEST_CODE = 2
@@ -35,8 +37,8 @@ class Report1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setHasOptionsMenu(true); //this may require it be in a Fragment
-        //photoFile = ReportManager.get.getPhotoFile(report)
 
+        ReportManager.get.setContext(this)
         setContentView(R.layout.report1)
 
         field_camera.setOnClickListener { takePictureWithCamera() }
@@ -64,10 +66,8 @@ class Report1Activity : AppCompatActivity() {
                     Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show()
                 }
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
-                image = data!!.getExtras().get("data") as Bitmap
+                image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
                 BitmapSender.instance.setBitmap(image)
-
-                //field_image.setImageBitmap(image)
             }
         }
 
@@ -95,14 +95,15 @@ class Report1Activity : AppCompatActivity() {
 
     private fun takePictureWithCamera() {
         // create Intent to take a picture and return control to the calling application
-        var intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        //photoFile = getPhotoFileUri(report.getImageFileName())
+        photoFile = ReportManager.get.getPhotoFile(report)
 
-        //val fileProvider : Uri = FileProvider.getUriForFile(this@Report1Activity,
-                //"com.example.andyr.fieldassistant", photoFile)
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
-
+        if(photoFile != null) {
+            val photoUri: Uri = FileProvider.getUriForFile(this,
+                    "com.example.andyr.fieldassistant", photoFile)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+        }
         startActivityForResult(intent, TAKE_PHOTO_REQUEST_CODE)
     }
 }

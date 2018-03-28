@@ -7,8 +7,7 @@ import android.text.format.DateFormat
 import kotlinx.android.synthetic.main.report3.*
 import android.text.Editable
 import android.text.TextWatcher
-
-
+import android.os.Environment.DIRECTORY_PICTURES
 
 
 /**
@@ -39,7 +38,7 @@ class Report3Activity : AppCompatActivity() {
         intent.type = "message/rfc822"
         intent.putExtra(Intent.EXTRA_EMAIL, emailList)
         intent.putExtra(Intent.EXTRA_TEXT, getReport())
-        intent = Intent.createChooser(intent, getString(R.string.send_report))
+        //intent = Intent.createChooser(intent, getString(R.string.send_report))
         startActivity(intent)
 
         //intent = Intent(this, Report1Activity::class.java)
@@ -111,5 +110,6 @@ class Report3Activity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {
 
             }
-        })}
+        })
+    }
 }

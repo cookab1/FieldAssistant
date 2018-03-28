@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
+import android.widget.Toast
 import com.example.andyr.fieldassistant.reportDatabase.ReportCursorWrapper
 import com.example.andyr.fieldassistant.reportDatabase.ReportDatabaseHelper
 import com.example.andyr.fieldassistant.reportDatabase.ReportSchema
@@ -27,7 +28,7 @@ public class ReportManager private constructor() {
         val get: ReportManager by lazy { Holder.GET }
     }
 
-    constructor(context: Context) : this() {
+    fun setContext(context: Context) {
         mContext = context.getApplicationContext()
         mDatabase = ReportDatabaseHelper(mContext).getWritableDatabase()
     }
@@ -70,8 +71,9 @@ public class ReportManager private constructor() {
             cursor.close()
         }
     }
+
     fun getPhotoFile(report : Report?) : File {
-        val filesDir : File = mContext!!.getFilesDir()
+        val filesDir: File = mContext!!.getFilesDir()
         return File(filesDir, report!!.getImageFileName())
     }
 
