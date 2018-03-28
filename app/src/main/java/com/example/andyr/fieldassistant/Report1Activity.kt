@@ -26,7 +26,7 @@ class Report1Activity : AppCompatActivity() {
     val CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034
     var photoFileName = null
     var photoFile: File? = null
-    var report: Report = Report()
+    private var report: Report = Report()
     lateinit var image: Bitmap
     private val TAKE_PHOTO_REQUEST_CODE = 1
     private val IMAGE_GALLERY_REQUEST_CODE = 2
