@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -17,6 +18,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import java.io.File
 import java.net.URI
 import java.util.*
 
@@ -30,12 +32,13 @@ class Report3Activity : AppCompatActivity() {
 
     private val TYPE_CODE = 0
     private val DICTATE_CODE = 1
-    private var report: Report = Report()
+    private lateinit var report: Report
+    private var photoUri: Uri? = null
     private lateinit var locationManager: LocationManager
     //define the listener
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            report.setLocation(location);
+            report.setLocation(location)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
@@ -45,12 +48,16 @@ class Report3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
+
+        report = Report(intent.getSerializableExtra("UUID") as UUID)
+
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
+
+        setupLocation()
         messageListener()
         emailListener()
-        setupLocation()
 
-        var calendar: Calendar = Calendar.getInstance()
+        val calendar: Calendar = Calendar.getInstance()
         report.setDate(calendar.time)
 
         //keyboardInit(intent.extras.getInt("keyboard_mode"));
@@ -60,7 +67,8 @@ class Report3Activity : AppCompatActivity() {
 
     private fun send() {
         val emailList = arrayOf(report.getRecipient())
-        val reportText = getReport()
+        val reportText = getReportString()
+        photoUri = getPhotoUri()
 
         val intent: Intent = Intent(Intent.ACTION_SEND)
         intent.type = "plain/text"
@@ -68,8 +76,8 @@ class Report3Activity : AppCompatActivity() {
         if(emailList[0] != null)
             intent.putExtra(Intent.EXTRA_EMAIL, emailList)
         if(reportText != null)
-            intent.putExtra(Intent.EXTRA_TEXT, getReport())
-        //if(photoUri != null)
+            intent.putExtra(Intent.EXTRA_TEXT, reportText)
+        if(photoUri != null)
             //intent.putExtra(Intent.EXTRA_STREAM, photoUri)
         //intent = Intent.createChooser(intent, getString(R.string.send_report))
         startActivity(intent)
@@ -77,7 +85,14 @@ class Report3Activity : AppCompatActivity() {
         //intent = Intent(this, Report1Activity::class.java)
         //startActivity(intent)
     }
-    private fun getReport(): String? {
+
+    private fun getPhotoUri() : Uri {
+        val filename = report.getImageFileName()
+        val photo = ReportManager.get.getPhotoFile(report)
+        return Uri.fromFile(photo)
+    }
+
+    private fun getReportString(): String? {
 
         val message = report.getMessage() + "\n"
 
@@ -85,17 +100,9 @@ class Report3Activity : AppCompatActivity() {
         val dateString = "When: " + DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
         val locationString = "Where: " + getLocationString()
 
-        return message + dateString + locationString
-        /*
+        return dateString + locationString + "\n" + message
 
-        if (suspect == null) {
-            suspect = getString(R.string.crime_report_no_suspect)
-        } else {
-            suspect = getString(R.string.crime_report_suspect, suspect)
-        }
-
-        return getString(R.string.report, message, report.getLocation(), dateString)
-        */
+        //return getString(R.string.report, message, report.getLocation(), dateString)
     }
 
     fun getLocationString(): String {
@@ -104,12 +111,16 @@ class Report3Activity : AppCompatActivity() {
         var locationString : String = ""
 
         if(report.getLocation() != null) {
-            locationData = location.getFromLocation(report.getLocation()!!.latitude, report.getLocation()!!.longitude, 1);
+            val latitude = report.getLocation()!!.latitude
+            val longitude = report.getLocation()!!.longitude
+
+            locationData = location.getFromLocation(latitude, longitude, 1);
             //locationString += locationData.get(0).getAddressLine(0) + " : "
-            locationString += locationData.get(0).getCountryName()
+            locationString += locationData.get(0).getCountryName() + "\n"
+            locationString += "lon: " + longitude + ", lat: " + latitude + "\n"
         }
         else
-            return "location"
+            return "No location given.\n"
         return locationString
     }
 
@@ -165,33 +176,12 @@ class Report3Activity : AppCompatActivity() {
     fun setupLocation() {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
-            try {
-                // Request location updates
-                locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
-            } catch(ex: SecurityException) {
-                Log.d("myTag", "Security Exception, no location available");
-                Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
-            }
-/*
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        LOCATION_REQUEST_CODE)
-            }
-        }
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates("gps", 1000L, 0f, locationListener)
-        } else {
+        try {
+            // Request location updates
+            locationManager.requestLocationUpdates("gps", 100L, 0f, locationListener)
+        } catch(ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available");
             Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
-        */
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

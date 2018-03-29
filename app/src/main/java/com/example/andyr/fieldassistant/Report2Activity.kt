@@ -89,7 +89,7 @@ class Report2Activity : AppCompatActivity() {
                     Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show()
                 }
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
-                image = data!!.getExtras().get("data") as Bitmap
+                //image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
                 BitmapSender.instance.setBitmap(image)
                 updateImage()
             } else {

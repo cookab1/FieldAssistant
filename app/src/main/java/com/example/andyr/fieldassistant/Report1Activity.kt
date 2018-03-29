@@ -37,6 +37,7 @@ class Report1Activity : AppCompatActivity() {
         //setHasOptionsMenu(true); //this may require it be in a Fragment
         //photoFile = ReportManager.get.getPhotoFile(report)
 
+        ReportManager.get.setContext(this)
         setContentView(R.layout.report1)
 
         field_camera.setOnClickListener { takePictureWithCamera() }
@@ -64,7 +65,7 @@ class Report1Activity : AppCompatActivity() {
                     Toast.makeText(this, "Unable to open image", Toast.LENGTH_LONG).show()
                 }
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
-                image = data!!.getExtras().get("data") as Bitmap
+                image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
                 BitmapSender.instance.setBitmap(image)
 
                 //field_image.setImageBitmap(image)
@@ -74,6 +75,8 @@ class Report1Activity : AppCompatActivity() {
         //Use requestCode to identify which action was taken
 
         intent = Intent(this, Report3Activity::class.java)
+
+        intent.putExtra("UUID", report.getId())
 
         //This line should be active if Report 2 is active
         //intent.putExtra("requestCode", requestCode)
@@ -98,11 +101,13 @@ class Report1Activity : AppCompatActivity() {
         // create Intent to take a picture and return control to the calling application
         var intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        //photoFile = getPhotoFileUri(report.getImageFileName())
+        photoFile = ReportManager.get.getPhotoFile(report)
 
-        //val fileProvider : Uri = FileProvider.getUriForFile(this@Report1Activity,
-                //"com.example.andyr.fieldassistant", photoFile)
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
+        if(photoFile != null) {
+            val photoUri: Uri = FileProvider.getUriForFile(this,
+                    "com.example.andyr.fieldassistant", photoFile)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+        }
 
         startActivityForResult(intent, TAKE_PHOTO_REQUEST_CODE)
     }

@@ -27,7 +27,7 @@ public class ReportManager private constructor() {
         val get: ReportManager by lazy { Holder.GET }
     }
 
-    constructor(context: Context) : this() {
+    fun setContext(context: Context) {
         mContext = context.getApplicationContext()
         mDatabase = ReportDatabaseHelper(mContext).getWritableDatabase()
     }
