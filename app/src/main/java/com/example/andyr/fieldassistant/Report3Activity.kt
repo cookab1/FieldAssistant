@@ -2,6 +2,7 @@ package com.example.andyr.fieldassistant
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import kotlinx.android.synthetic.main.report3.*
@@ -32,6 +34,7 @@ class Report3Activity : AppCompatActivity() {
 
     private val TYPE_CODE = 0
     private val DICTATE_CODE = 1
+    private val SEND_CODE = 2
     private lateinit var report: Report
     private var photoUri: Uri? = null
     private lateinit var locationManager: LocationManager
@@ -49,7 +52,9 @@ class Report3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
 
-        report = Report(intent.getSerializableExtra("UUID") as UUID)
+        report = ReportSender.instance.getReport()
+        //report = Report(intent.getSerializableExtra("UUID") as UUID)
+        ReportManager.get.setContext(this)
 
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
 
@@ -64,32 +69,40 @@ class Report3Activity : AppCompatActivity() {
 
         send_message.setOnClickListener { send() }
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(resultCode == Activity.RESULT_OK) {
+            //everything processed correctly
+            if(requestCode == SEND_CODE) {
+                intent = Intent(this, Report1Activity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 
     private fun send() {
         val emailList = arrayOf(report.getRecipient())
         val reportText = getReportString()
-        photoUri = getPhotoUri()
+        photoUri = report.getUri()
 
-        val intent: Intent = Intent(Intent.ACTION_SEND)
-        intent.type = "plain/text"
+        try{
 
-        if(emailList[0] != null)
-            intent.putExtra(Intent.EXTRA_EMAIL, emailList)
-        if(reportText != null)
-            intent.putExtra(Intent.EXTRA_TEXT, reportText)
-        if(photoUri != null)
-            //intent.putExtra(Intent.EXTRA_STREAM, photoUri)
-        //intent = Intent.createChooser(intent, getString(R.string.send_report))
-        startActivity(intent)
+            val intent: Intent = Intent(Intent.ACTION_SEND)
+            intent.type = "plain/text"
 
-        //intent = Intent(this, Report1Activity::class.java)
-        //startActivity(intent)
-    }
-
-    private fun getPhotoUri() : Uri {
-        val filename = report.getImageFileName()
-        val photo = ReportManager.get.getPhotoFile(report)
-        return Uri.fromFile(photo)
+            if (emailList[0] != null)
+                intent.putExtra(Intent.EXTRA_EMAIL, emailList)
+            if (reportText != null)
+                intent.putExtra(Intent.EXTRA_TEXT, reportText)
+            if (photoUri != null) {
+                Toast.makeText(this, "Adding Uri to E-mail", Toast.LENGTH_LONG).show()
+                intent.putExtra(Intent.EXTRA_STREAM, photoUri)
+            }
+            //intent = Intent.createChooser(intent, getString(R.string.send_report))
+            startActivityForResult(intent, SEND_CODE)
+        } catch (t : Throwable){
+            Toast.makeText(this, "Request failed: " + t.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getReportString(): String? {
@@ -100,9 +113,7 @@ class Report3Activity : AppCompatActivity() {
         val dateString = "When: " + DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
         val locationString = "Where: " + getLocationString()
 
-        return dateString + locationString + "\n" + message
-
-        //return getString(R.string.report, message, report.getLocation(), dateString)
+        return message + "\n" + dateString + locationString + "\n"
     }
 
     fun getLocationString(): String {
@@ -114,13 +125,13 @@ class Report3Activity : AppCompatActivity() {
             val latitude = report.getLocation()!!.latitude
             val longitude = report.getLocation()!!.longitude
 
-            locationData = location.getFromLocation(latitude, longitude, 1);
+            locationData = location.getFromLocation(latitude, longitude, 1)
             //locationString += locationData.get(0).getAddressLine(0) + " : "
-            locationString += locationData.get(0).getCountryName() + "\n"
+            locationString += locationData.get(0).countryName + "\n"
             locationString += "lon: " + longitude + ", lat: " + latitude + "\n"
         }
         else
-            return "No location given.\n"
+            return "No location given.\n\n"
         return locationString
     }
 
@@ -128,7 +139,7 @@ class Report3Activity : AppCompatActivity() {
 
         //open keyboard automatically if type
         if(code == TYPE_CODE) {
-            field_message_3.performClick();
+            field_message_3.performClick()
 
             //open keyboard then enable dictation automatically if dictate
         } else if(code == DICTATE_CODE) {
@@ -178,9 +189,9 @@ class Report3Activity : AppCompatActivity() {
 
         try {
             // Request location updates
-            locationManager.requestLocationUpdates("gps", 100L, 0f, locationListener)
+            locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
         } catch(ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available");
+            Log.d("myTag", "Security Exception, no location available")
             Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
     }

@@ -51,6 +51,7 @@ class Report1Activity : AppCompatActivity() {
             if(requestCode == IMAGE_GALLERY_REQUEST_CODE) {
                 //hearing back from the image gallery
                 var imageUri: Uri = data!!.data
+                report.setUri(imageUri)
 
                 var inputStream: InputStream
 
@@ -58,7 +59,6 @@ class Report1Activity : AppCompatActivity() {
                     inputStream = contentResolver.openInputStream(imageUri)
                     //image retrieved
                     image = BitmapFactory.decodeStream(inputStream)
-                    BitmapSender.instance.setBitmap(image)
 
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
@@ -66,16 +66,18 @@ class Report1Activity : AppCompatActivity() {
                 }
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
                 image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
-                BitmapSender.instance.setBitmap(image)
 
                 //field_image.setImageBitmap(image)
             }
+            ReportSender.instance.setReport(report)
+            BitmapSender.instance.setBitmap(image)
         }
 
         //Use requestCode to identify which action was taken
 
         intent = Intent(this, Report3Activity::class.java)
 
+        ReportManager.get.addReport(report)
         intent.putExtra("UUID", report.getId())
 
         //This line should be active if Report 2 is active
@@ -90,9 +92,9 @@ class Report1Activity : AppCompatActivity() {
         var pictureDirectory: File = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         var pictureDirectoryPath: String = pictureDirectory.path
 
-        var data: Uri = Uri.parse(pictureDirectoryPath)
+        var photoUri: Uri = Uri.parse(pictureDirectoryPath)
 
-        photoPickerIntent.setDataAndType(data, "image/*")
+        photoPickerIntent.setDataAndType(photoUri, "image/*")
 
         startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST_CODE)
     }
@@ -107,6 +109,7 @@ class Report1Activity : AppCompatActivity() {
             val photoUri: Uri = FileProvider.getUriForFile(this,
                     "com.example.andyr.fieldassistant", photoFile)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+            report.setUri(photoUri)
         }
 
         startActivityForResult(intent, TAKE_PHOTO_REQUEST_CODE)

@@ -1,6 +1,7 @@
 package com.example.andyr.fieldassistant
 
 import android.location.Location
+import android.net.Uri
 import java.util.UUID;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ class Report {
     private var mRecipient: Group? = null
     private var mSingleRecipient: String? = null
     private var mImage: String? = null
+    private var mUri: Uri? = null
     private var mMessage: String? = null
 
     constructor() {
@@ -52,6 +54,14 @@ class Report {
 
     fun getImageFileName(): String {
         return "IMG_" + getId().toString() + ".jpg"
+    }
+
+    fun setUri(uri: Uri) {
+        mUri = uri
+    }
+
+    fun getUri() : Uri? {
+        return mUri
     }
 
     fun setMessage(message: String) {
