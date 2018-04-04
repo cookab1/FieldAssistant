@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.text.format.DateFormat
 import kotlinx.android.synthetic.main.report3.*
@@ -95,7 +94,6 @@ class Report3Activity : AppCompatActivity() {
             if (reportText != null)
                 intent.putExtra(Intent.EXTRA_TEXT, reportText)
             if (photoUri != null) {
-                Toast.makeText(this, "Adding Uri to E-mail", Toast.LENGTH_LONG).show()
                 intent.putExtra(Intent.EXTRA_STREAM, photoUri)
             }
             //intent = Intent.createChooser(intent, getString(R.string.send_report))
@@ -110,8 +108,8 @@ class Report3Activity : AppCompatActivity() {
         val message = report.getMessage() + "\n"
 
         val dateFormat = "EEE, MMM dd hh:mm aa z"
-        val dateString = "When: " + DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
-        val locationString = "Where: " + getLocationString()
+        val dateString = DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
+        val locationString = getLocationString()
 
         return message + "\n" + dateString + locationString + "\n"
     }
@@ -187,6 +185,12 @@ class Report3Activity : AppCompatActivity() {
     fun setupLocation() {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE)
+        }
+
         try {
             // Request location updates
             locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
@@ -194,5 +198,8 @@ class Report3Activity : AppCompatActivity() {
             Log.d("myTag", "Security Exception, no location available")
             Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
+
+
     }
+
 }
