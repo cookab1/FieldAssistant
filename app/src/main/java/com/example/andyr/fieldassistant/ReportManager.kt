@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
 /**
  * Created by andyr on 3/6/2018.
  */
-public class ReportManager private constructor() {
+class ReportManager private constructor() {
 
     private var mContext: Context? = null
     private var mDatabase: SQLiteDatabase? = null
@@ -29,8 +29,8 @@ public class ReportManager private constructor() {
     }
 
     fun setContext(context: Context) {
-        mContext = context.getApplicationContext()
-        mDatabase = ReportDatabaseHelper(mContext).getWritableDatabase()
+        mContext = context.applicationContext
+        mDatabase = ReportDatabaseHelper(mContext).writableDatabase
     }
 
     fun addReport(report: Report?) {
@@ -44,8 +44,8 @@ public class ReportManager private constructor() {
         val cursor : ReportCursorWrapper = queryReports(null, null)
 
         try {
-            cursor.moveToFirst();
-            while(!cursor.isAfterLast()) {
+            cursor.moveToFirst()
+            while(!cursor.isAfterLast) {
                 reports.add(cursor.getReport())
                 cursor.moveToNext()
             }
@@ -62,8 +62,8 @@ public class ReportManager private constructor() {
                 Array<String?>(1) {id.toString()}
         )
         try {
-            if(cursor.getCount() == 0)
-            return null;
+            if(cursor.count == 0)
+            return null
 
             cursor.moveToFirst()
             return cursor.getReport()
@@ -71,10 +71,9 @@ public class ReportManager private constructor() {
             cursor.close()
         }
     }
-
-    fun getPhotoFile(report : Report?) : File {
-        val filesDir: File = mContext!!.getFilesDir()
-        return File(filesDir, report!!.getImageFileName())
+    fun getPhotoFile(report : Report) : File {
+        val filesDir : File = mContext!!.filesDir
+        return File(filesDir, report.getImageFileName())
     }
 
     fun updateReport(report : Report) {
