@@ -10,6 +10,8 @@
 
 	<string name="message_hint">Enter Message</string>
 	<string name="email_hint">Recipient e-mail</string>
+	<string name="location_hint">No Location</string>
+	<string name="date_hint">No Date</string>
 
 	<string name="group_name_label">Group Name</string>
 	<string name="group_name_hint">Enter Name</string>

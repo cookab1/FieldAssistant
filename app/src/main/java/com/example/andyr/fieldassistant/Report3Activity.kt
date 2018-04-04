@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.report3.*
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import java.io.File
 import java.net.URI
@@ -40,6 +42,7 @@ class Report3Activity : AppCompatActivity() {
     //define the listener
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
+            location_text.setText(getLocationString(false))
             report.setLocation(location)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -50,6 +53,8 @@ class Report3Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
+
+
 
         report = ReportSender.instance.getReport()
         //report = Report(intent.getSerializableExtra("UUID") as UUID)
@@ -63,11 +68,28 @@ class Report3Activity : AppCompatActivity() {
 
         val calendar: Calendar = Calendar.getInstance()
         report.setDate(calendar.time)
+        val dateFormat = "EEE, MMM dd hh:mm"
+        val dateString = DateFormat.format(dateFormat, report.getDate()).toString()
+        date_text.setText(dateString)
 
         //keyboardInit(intent.extras.getInt("keyboard_mode"));
-
-        send_message.setOnClickListener { send() }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        inflater.inflate(R.menu.send_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.send_email -> {
+                send()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if(resultCode == Activity.RESULT_OK) {
@@ -109,13 +131,13 @@ class Report3Activity : AppCompatActivity() {
 
         val dateFormat = "EEE, MMM dd hh:mm aa z"
         val dateString = DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
-        val locationString = getLocationString()
+        val locationString = getLocationString(true)
 
         return message + "\n" + dateString + locationString + "\n"
     }
 
-    fun getLocationString(): String {
-        val location : Geocoder = Geocoder(this)
+    fun getLocationString(full: Boolean): String {
+        val geocoder : Geocoder = Geocoder(this)
         val locationData : List<Address>
         var locationString : String = ""
 
@@ -123,10 +145,12 @@ class Report3Activity : AppCompatActivity() {
             val latitude = report.getLocation()!!.latitude
             val longitude = report.getLocation()!!.longitude
 
-            locationData = location.getFromLocation(latitude, longitude, 1)
+            locationData = geocoder.getFromLocation(latitude, longitude, 1)
             //locationString += locationData.get(0).getAddressLine(0) + " : "
-            locationString += locationData.get(0).countryName + "\n"
-            locationString += "lon: " + longitude + ", lat: " + latitude + "\n"
+            locationString += locationData.get(0).countryName
+            if(!full)
+                return locationString
+            locationString += "\nlon: " + longitude + ", lat: " + latitude + "\n"
         }
         else
             return "No location given.\n\n"
