@@ -55,19 +55,6 @@
 		app:layout_constraintVertical_bias="0.51" />
 
 	<EditText
-		android:id="@+id/choose_recipient"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:layout_marginEnd="8dp"
-		android:layout_marginStart="8dp"
-		android:layout_marginTop="8dp"
-		android:hint="@string/email_hint"
-        android:background="@drawable/edit_text_style"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/field_image_3" />
-
-	<EditText
 		android:id="@+id/field_message_3"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
@@ -75,12 +62,27 @@
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
-		android:hint="@string/message_hint"
+		android:background="@drawable/edit_text_style"
 		android:gravity="top"
-        android:background="@drawable/edit_text_style"
+		android:hint="@string/message_hint"
+		android:padding="5dp"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/choose_recipient" />
+
+	<EditText
+		android:id="@+id/choose_recipient"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="8dp"
+		android:layout_marginStart="8dp"
+		android:layout_marginTop="8dp"
+		android:padding="5dp"
+		android:hint="@string/email_hint"
+        android:background="@drawable/edit_text_style"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/field_image_3" />
 
 </android.support.constraint.ConstraintLayout>

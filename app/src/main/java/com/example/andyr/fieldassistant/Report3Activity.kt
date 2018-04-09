@@ -1,14 +1,11 @@
 package com.example.andyr.fieldassistant
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.*
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -21,11 +18,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.OnSuccessListener
-import java.io.File
-import java.net.URI
 import java.util.*
 
 
@@ -45,7 +37,7 @@ class Report3Activity : AppCompatActivity() {
     //define the listener
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            location_text.setText(getLocationString(false))
+            location_text.text = getLocationString(false)
             report.setLocation(location)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -57,25 +49,37 @@ class Report3Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report3)
 
-
-
-        report = ReportSender.instance.getReport()
         //report = Report(intent.getSerializableExtra("UUID") as UUID)
-        ReportManager.get.setContext(this)
+        report = ReportSender.instance.getReport()
+        initializeView(report)
 
+        ReportManager.get.setContext(this)
+    }
+
+    fun initializeView(data : Report) {
+        //set the image
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
 
+        //if there's a message, set the message
+        if(data.getMessage() != null)
+            field_message_3.setText(data.getMessage())
+        
+        if(data.getRecipient() != null)
+            choose_recipient.setText(data.getRecipient())
+
+        //set the location services to get location updates
         setupLocation()
+
+        //set listeners
         messageListener()
         emailListener()
 
+        //initialize the date and time
         val calendar: Calendar = Calendar.getInstance()
         report.setDate(calendar.time)
         val dateFormat = "EEE, MMM dd hh:mm"
         val dateString = DateFormat.format(dateFormat, report.getDate()).toString()
         date_text.setText(dateString)
-
-        //keyboardInit(intent.extras.getInt("keyboard_mode"));
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -160,18 +164,6 @@ class Report3Activity : AppCompatActivity() {
         return locationString
     }
 
-    private fun keyboardInit(code: Int) {
-
-        //open keyboard automatically if type
-        if(code == TYPE_CODE) {
-            field_message_3.performClick()
-
-            //open keyboard then enable dictation automatically if dictate
-        } else if(code == DICTATE_CODE) {
-
-        }
-    }
-
     private fun messageListener() {
         field_message_3.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -226,27 +218,11 @@ class Report3Activity : AppCompatActivity() {
             Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
 
-        report.setLocation(locationManager.getLastKnownLocation("gps"))
-        if(report.getLocation() != null) {
-            Toast.makeText(this, "Set Location", Toast.LENGTH_LONG).show()
+        val location = locationManager.getLastKnownLocation("gps")
+        if(location != null) {
+            report.setLocation(location)
+            location_text.text = getLocationString(false)
         }
-
-        /*
-        val locationClient : FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        //Toast.makeText(this, "Before Set Location", Toast.LENGTH_LONG).show()
-        locationClient.lastLocation.addOnSuccessListener( this, OnSuccessListener<Location>() {
-            fun onSuccess(location : Location) {
-                Toast.makeText(this, "Set Location", Toast.LENGTH_LONG).show()
-                report.setLocation(location)
-            }
-        } )
-        */
 
     }
 
