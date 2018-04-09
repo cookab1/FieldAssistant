@@ -21,6 +21,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.OnSuccessListener
 import java.io.File
 import java.net.URI
 import java.util.*
@@ -217,12 +220,33 @@ class Report3Activity : AppCompatActivity() {
 
         try {
             // Request location updates
-            locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
+            locationManager.requestLocationUpdates("gps", 1000L, 0f, locationListener)
         } catch(ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available")
             Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
 
+        report.setLocation(locationManager.getLastKnownLocation("gps"))
+        if(report.getLocation() != null) {
+            Toast.makeText(this, "Set Location", Toast.LENGTH_LONG).show()
+        }
+
+        /*
+        val locationClient : FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        //Toast.makeText(this, "Before Set Location", Toast.LENGTH_LONG).show()
+        locationClient.lastLocation.addOnSuccessListener( this, OnSuccessListener<Location>() {
+            fun onSuccess(location : Location) {
+                Toast.makeText(this, "Set Location", Toast.LENGTH_LONG).show()
+                report.setLocation(location)
+            }
+        } )
+        */
 
     }
 
