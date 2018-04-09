@@ -36,7 +36,6 @@ class Report1Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true); //this may require it be in a Fragment
 
         ReportManager.get.setContext(this)
         setContentView(R.layout.report1)
@@ -67,8 +66,6 @@ class Report1Activity : AppCompatActivity() {
                 }
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
                 image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
-
-                //field_image.setImageBitmap(image)
             }
             ReportSender.instance.setReport(report)
             BitmapSender.instance.setBitmap(image)
@@ -80,9 +77,6 @@ class Report1Activity : AppCompatActivity() {
 
         ReportManager.get.addReport(report)
         intent.putExtra("UUID", report.getId())
-
-        //This line should be active if Report 2 is active
-        //intent.putExtra("requestCode", requestCode)
 
         startActivity(intent)
     }

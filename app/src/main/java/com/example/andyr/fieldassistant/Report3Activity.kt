@@ -28,8 +28,6 @@ class Report3Activity : AppCompatActivity() {
     
     private val LOCATION_REQUEST_CODE = 10
 
-    private val TYPE_CODE = 0
-    private val DICTATE_CODE = 1
     private val SEND_CODE = 2
     private lateinit var report: Report
     private var photoUri: Uri? = null
@@ -63,7 +61,7 @@ class Report3Activity : AppCompatActivity() {
         //if there's a message, set the message
         if(data.getMessage() != null)
             field_message_3.setText(data.getMessage())
-        
+
         if(data.getRecipient() != null)
             choose_recipient.setText(data.getRecipient())
 
@@ -164,6 +162,31 @@ class Report3Activity : AppCompatActivity() {
         return locationString
     }
 
+    fun setupLocation() {
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_REQUEST_CODE)
+        }
+
+        try {
+            // Request location updates
+            locationManager.requestLocationUpdates("gps", 1000L, 0f, locationListener)
+        } catch(ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available")
+            Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
+        }
+
+        val location = locationManager.getLastKnownLocation("gps")
+        if(location != null) {
+            report.setLocation(location)
+            location_text.text = getLocationString(false)
+        }
+
+    }
+
     private fun messageListener() {
         field_message_3.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -199,31 +222,4 @@ class Report3Activity : AppCompatActivity() {
             }
         })
     }
-
-
-    fun setupLocation() {
-        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    LOCATION_REQUEST_CODE)
-        }
-
-        try {
-            // Request location updates
-            locationManager.requestLocationUpdates("gps", 1000L, 0f, locationListener)
-        } catch(ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available")
-            Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
-        }
-
-        val location = locationManager.getLastKnownLocation("gps")
-        if(location != null) {
-            report.setLocation(location)
-            location_text.text = getLocationString(false)
-        }
-
-    }
-
 }
