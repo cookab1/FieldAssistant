@@ -109,6 +109,7 @@ class Report3Activity : AppCompatActivity() {
     private fun send() {
         val emailList = arrayOf(report.getRecipient())
         val reportText = getReportString()
+        val subject = "Field Assistant - " + getLocationString(false)
         photoUri = report.getUri()
 
         try{
@@ -118,11 +119,13 @@ class Report3Activity : AppCompatActivity() {
 
             if (emailList[0] != null)
                 intent.putExtra(Intent.EXTRA_EMAIL, emailList)
-            if (reportText != null)
+            if (subject != null)
+                intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+            if (reportText != null) 
                 intent.putExtra(Intent.EXTRA_TEXT, reportText)
-            if (photoUri != null) {
+            if (photoUri != null) 
                 intent.putExtra(Intent.EXTRA_STREAM, photoUri)
-            }
+            
             //intent = Intent.createChooser(intent, getString(R.string.send_report))
             startActivityForResult(intent, SEND_CODE)
         } catch (t : Throwable){
@@ -151,7 +154,9 @@ class Report3Activity : AppCompatActivity() {
             val longitude = report.getLocation()!!.longitude
 
             locationData = geocoder.getFromLocation(latitude, longitude, 1)
-            //locationString += locationData.get(0).getAddressLine(0) + " : "
+            locationString += locationData.get(0).locality + ",  "
+            if(locationData.get(0).adminArea != null)
+                locationString += locationData.get(0).adminArea + " "
             locationString += locationData.get(0).countryName
             if(!full)
                 return locationString
