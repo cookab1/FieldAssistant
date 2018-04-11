@@ -3,10 +3,12 @@ package com.example.andyr.fieldassistant
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.*
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +19,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import java.util.*
 
@@ -52,18 +55,43 @@ class Report3Activity : AppCompatActivity() {
         initializeView(report)
 
         ReportManager.get.setContext(this)
+
+        change_button.setOnClickListener {
+            val groups = PreferenceManager.getDefaultSharedPreferences(this)
+            if(display_default.visibility == View.VISIBLE) {
+                display_default.visibility = View.INVISIBLE
+                choose_recipient.visibility = View.VISIBLE
+                report.setRecipient(choose_recipient.text.toString())
+                change_button.setText(R.string.return_default)
+            } else {
+                display_default.visibility = View.VISIBLE
+                choose_recipient.visibility = View.INVISIBLE
+                report.setRecipient(groups.getString("default_recipient","no default set"))
+                change_button.setText(R.string.change_recipient)
+            }
+        }
     }
 
     fun initializeView(data : Report) {
         //set the image
         field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
+        val groups = PreferenceManager.getDefaultSharedPreferences(this)
 
         //if there's a message, set the message
         if(data.getMessage() != null)
             field_message_3.setText(data.getMessage())
 
-        if(data.getRecipient() != null)
+        if(data.getRecipient() != null) {
+            display_default.visibility = View.INVISIBLE
+            choose_recipient.visibility = View.VISIBLE
             choose_recipient.setText(data.getRecipient())
+        } else {
+            display_default.visibility = View.VISIBLE
+            choose_recipient.visibility = View.INVISIBLE
+            report.setRecipient(groups.getString("default_recipient","no default set"))
+        }
+        display_default.setText(groups.getString("default_recipient", "no default set"))
+
 
         //set the location services to get location updates
         setupLocation()
@@ -119,7 +147,6 @@ class Report3Activity : AppCompatActivity() {
 
             if (emailList[0] != null)
                 intent.putExtra(Intent.EXTRA_EMAIL, emailList)
-            if (subject != null)
                 intent.putExtra(Intent.EXTRA_SUBJECT, subject)
             if (reportText != null) 
                 intent.putExtra(Intent.EXTRA_TEXT, reportText)

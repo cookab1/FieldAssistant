@@ -13,6 +13,8 @@ import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
 import android.renderscript.ScriptGroup
 import android.support.v4.content.FileProvider
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.android.synthetic.main.report1.*
 import java.io.File
@@ -42,6 +44,26 @@ class Report1Activity : AppCompatActivity() {
 
         field_camera.setOnClickListener { takePictureWithCamera() }
         field_photos.setOnClickListener { openPhotos() }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        inflater.inflate(R.menu.report_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.group_item -> {
+                intent = Intent(this, GroupActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.report_item -> {
+                //do nothing
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

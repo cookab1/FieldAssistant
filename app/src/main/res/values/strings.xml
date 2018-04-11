@@ -1,7 +1,9 @@
 <resources>
 
 	<string name="app_name">Field Assistant</string>
-	<string name="default_recipient">"Default Recipient"</string>
+	<string name="default_recipient">Default Recipient</string>
+	<string name="change_recipient">Change</string>
+	<string name="return_default">Default</string>
 	<string name="send_message">SEND</string>
 	<string name="use_dictation">Dictate</string>
 	<string name="use_keyboard">Keyboard</string>
@@ -13,6 +15,8 @@
 	<string name="location_hint">No Location</string>
 	<string name="date_hint">No Date</string>
 
+    <string name="report_label">Report</string>
+    <string name="management_label">Management</string>
 	<string name="group_name_label">Group Name</string>
 	<string name="group_name_hint">Enter Name</string>
 	<string name="group_members_label">Group Members</string>
@@ -24,18 +28,42 @@
 
 	<string name="send_report">Send crime report via</string>
 
+    <string name="title_activity_group">Settings</string>
 
-	<string name="Test_Text">
-		I am concerned about my apprentice. He shows signs of anger. On top of that, his skill continues to grow. Each lesson, he becomes more of a threat to the Jedi. </string>
-	<string name="Test_Date">6/14/3098</string>
-	<string name="Test_Status">Pending...</string>
-	<string name="Test_Location">Jedi Temple, Naboo</string>
-	<string name="Test_Recipient">Obiwan Kenobi</string>
-	<string name="Test_Title">Field Title</string>
-	<string name="Test_Group_Name">High Council</string>
-	<string name="Test_Group_Number">24</string>
-	<string name="Test_Group_Member0">Qui-Gon Jinn</string>
-	<string name="Test_Group_Member1">Mace Windu</string>
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_groups">Groups</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_default_recipient">Default Recipient</string>
+    <string name="pref_default_display_name">default@email.com</string>
+
+    <string name="pref_title_add_friends_to_messages">Add Group</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_settings">Settings</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
 
 </resources>
 
