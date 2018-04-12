@@ -70,6 +70,14 @@ class Report3Activity : AppCompatActivity() {
                 change_button.setText(R.string.change_recipient)
             }
         }
+        location_button.setOnClickListener {
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        LOCATION_REQUEST_CODE)
+            }
+            //Toast.makeText(this, "Permission supposedly Granted", Toast.LENGTH_LONG).show()
+        }
     }
 
     fun initializeView(data : Report) {
@@ -195,28 +203,40 @@ class Report3Activity : AppCompatActivity() {
     }
 
     fun setupLocation() {
-        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission not yet Granted", Toast.LENGTH_LONG).show()
             ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     LOCATION_REQUEST_CODE)
         }
+    }
 
-        try {
-            // Request location updates
-            locationManager.requestLocationUpdates("gps", 1000L, 0f, locationListener)
-        } catch(ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available")
-            Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if(requestCode == LOCATION_REQUEST_CODE){
+            if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //accepted
+                Toast.makeText(this, "Location Enabled", Toast.LENGTH_LONG).show()
+
+                try {
+                    // Request location updates
+                    locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
+                    val location = locationManager.getLastKnownLocation("gps")
+                    if(location != null) {
+                        report.setLocation(location)
+                        location_text.text = getLocationString(false)
+                    }
+                } catch(ex: SecurityException) {
+                    Log.d("myTag", "Security Exception, no location available")
+                    Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
+                }
+            } else {
+                //denied
+                Toast.makeText(this, "Location Disabled", Toast.LENGTH_LONG).show()
+            }
         }
-
-        val location = locationManager.getLastKnownLocation("gps")
-        if(location != null) {
-            report.setLocation(location)
-            location_text.text = getLocationString(false)
-        }
-
     }
 
     private fun messageListener() {
