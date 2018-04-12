@@ -3,15 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/report_item"
-        android:title="@string/report_label"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/group_item"
-        android:title="@string/management_label"
+        android:title="@string/manage_label"
         app:showAsAction="always" />
-    <!--<item-->
-        <!--android:id="@+id/setting_item"-->
-        <!--android:title="Settings"-->
-        <!--app:showAsAction="never" />-->
 </menu>

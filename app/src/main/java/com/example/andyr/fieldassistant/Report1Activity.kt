@@ -59,9 +59,6 @@ class Report1Activity : AppCompatActivity() {
                 intent = Intent(this, GroupActivity::class.java)
                 startActivity(intent)
             }
-            R.id.report_item -> {
-                //do nothing
-            }
         }
         return super.onOptionsItemSelected(item)
     }

@@ -5,7 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.location.*
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -20,7 +23,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Switch
 import android.widget.Toast
+import java.io.IOError
+import java.io.IOException
 import java.util.*
 
 
@@ -78,7 +84,7 @@ class Report3Activity : AppCompatActivity() {
 
     fun initializeView(data : Report) {
         //set the image
-        field_image_3.setImageBitmap(BitmapSender.instance.getBitmap())
+        field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
         val groups = PreferenceManager.getDefaultSharedPreferences(this)
 
         //if there's a message, set the message
@@ -259,6 +265,24 @@ class Report3Activity : AppCompatActivity() {
                 Toast.makeText(this, "Location Disabled", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun rotateImage(bitmap: Bitmap): Bitmap {
+        val fileLocation = ReportManager.get.getPhotoFile(report).absolutePath
+        var exif: ExifInterface? = null
+        try {
+            exif = ExifInterface(fileLocation)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+        val orientation = exif!!.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        var matrix: Matrix = Matrix()
+        when(orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
+        }
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
     private fun messageListener() {

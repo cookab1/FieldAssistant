@@ -15,8 +15,7 @@
 	<string name="location_hint">NO LOCATION</string>
 	<string name="date_hint">NO DATE</string>
 
-    <string name="report_label">Report</string>
-    <string name="management_label">Management</string>
+    <string name="manage_label">Manage App</string>
 	<string name="group_name_label">Group Name</string>
 	<string name="group_name_hint">Enter Name</string>
 	<string name="group_members_label">Group Members</string>
