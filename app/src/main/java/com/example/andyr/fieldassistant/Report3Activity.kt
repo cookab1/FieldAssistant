@@ -71,11 +71,7 @@ class Report3Activity : AppCompatActivity() {
             }
         }
         location_button.setOnClickListener {
-            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        LOCATION_REQUEST_CODE)
-            }
+            setLocationText()
             //Toast.makeText(this, "Permission supposedly Granted", Toast.LENGTH_LONG).show()
         }
     }
@@ -101,19 +97,19 @@ class Report3Activity : AppCompatActivity() {
         display_default.setText(groups.getString("default_recipient", "no default set"))
 
 
-        //set the location services to get location updates
-        setupLocation()
-
-        //set listeners
-        messageListener()
-        emailListener()
-
         //initialize the date and time
         val calendar: Calendar = Calendar.getInstance()
         report.setDate(calendar.time)
         val dateFormat = "EEE, MMM dd hh:mm"
         val dateString = DateFormat.format(dateFormat, report.getDate()).toString()
         date_text.setText(dateString)
+
+        //set the location services to get location updates
+        setupLocation()
+
+        //set listeners
+        messageListener()
+        emailListener()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -191,7 +187,7 @@ class Report3Activity : AppCompatActivity() {
             locationData = geocoder.getFromLocation(latitude, longitude, 1)
             locationString += locationData.get(0).locality + ",  "
             if(locationData.get(0).adminArea != null)
-                locationString += locationData.get(0).adminArea + " "
+                locationString += locationData.get(0).adminArea + " \n"
             locationString += locationData.get(0).countryName
             if(!full)
                 return locationString
@@ -203,11 +199,36 @@ class Report3Activity : AppCompatActivity() {
     }
 
     fun setupLocation() {
+
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "Permission not yet Granted", Toast.LENGTH_LONG).show()
             ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     LOCATION_REQUEST_CODE)
+        }
+        try {
+            // Request location updates
+            locationManager.requestLocationUpdates("gps", 0L, 0f, locationListener)
+            setLocationText()
+        } catch (ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available")
+            Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun setLocationText() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Permission not yet Granted", Toast.LENGTH_LONG).show()
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_REQUEST_CODE)
+        }
+        val location = locationManager.getLastKnownLocation("gps")
+        if (location != null) {
+            report.setLocation(location)
+            location_text.text = getLocationString(false)
         }
     }
 
@@ -215,6 +236,7 @@ class Report3Activity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
         if(requestCode == LOCATION_REQUEST_CODE){
             if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //accepted
