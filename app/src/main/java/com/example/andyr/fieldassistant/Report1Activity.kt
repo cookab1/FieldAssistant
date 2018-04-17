@@ -8,10 +8,8 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.os.Environment.getExternalStorageDirectory
 import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
-import android.renderscript.ScriptGroup
 import android.support.v4.content.FileProvider
 import android.view.Menu
 import android.view.MenuItem
@@ -19,9 +17,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.report1.*
 import java.io.File
 import java.io.FileNotFoundException
-import java.io.IOException
 import java.io.InputStream
-import java.text.SimpleDateFormat
 
 
 class Report1Activity : AppCompatActivity() {
@@ -92,7 +88,7 @@ class Report1Activity : AppCompatActivity() {
 
         //Use requestCode to identify which action was taken
 
-        intent = Intent(this, Report3Activity::class.java)
+        intent = Intent(this, Report2Activity::class.java)
 
         ReportManager.get.addReport(report)
         intent.putExtra("UUID", report.getId())

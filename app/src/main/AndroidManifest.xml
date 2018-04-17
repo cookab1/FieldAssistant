@@ -22,9 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Report2Activity" />
         <activity
-            android:name=".Report3Activity"
+            android:name=".Report2Activity"
             android:windowSoftInputMode="stateVisible" />
 
         <provider

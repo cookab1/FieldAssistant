@@ -75,7 +75,7 @@ class GroupActivity : AppCompatPreferenceActivity() {
     override fun isValidFragment(fragmentName: String): Boolean {
         return PreferenceFragment::class.java.name == fragmentName
                 || GroupsPreferenceFragment::class.java.name == fragmentName
-                || SettingsPreferenceFragment::class.java.name == fragmentName
+                //|| SettingsPreferenceFragment::class.java.name == fragmentName
     }
 
     /**
@@ -111,11 +111,12 @@ class GroupActivity : AppCompatPreferenceActivity() {
      * This fragment shows setting preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     class SettingsPreferenceFragment : PreferenceFragment() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.pref_settings)
+            //addPreferencesFromResource(R.xml.pref_settings)
             setHasOptionsMenu(true)
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -162,7 +163,7 @@ class GroupActivity : AppCompatPreferenceActivity() {
                 // using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
                     // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent)
+                    //preference.setSummary(R.string.pref_ringtone_silent)
 
                 } else {
                     val ringtone = RingtoneManager.getRingtone(
@@ -216,4 +217,5 @@ class GroupActivity : AppCompatPreferenceActivity() {
                             .getString(preference.key, ""))
         }
     }
+
 }

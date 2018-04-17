@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Field Assistant</string>
+    <string name="default_recipient">Destinataire par defaut</string>
+    <string name="change_recipient">Changement</string>
+    <string name="return_default">Defaut</string>
+    <string name="send_message">ENVOYER</string>
+    <string name="use_camera">Camera</string>
+    <string name="from_photos">Galerie</string>
+
+    <string name="message_hint">Message</string>
+    <string name="email_hint">E-mail de Destinataire</string>
+    <string name="location_hint">AUCUNE LOCALISATION</string>
+    <string name="date_hint">AUCUNE DATE</string>
+
+    <string name="manage_label">Gerer L\'application</string>
+    <string name="group_name_label">Nom de Groupe</string>
+    <string name="group_name_hint">Entre le nom</string>
+    <string name="group_members_label">Membres de Group</string>
+    <string name="member_email_hint">Adresse E-mail</string>
+    <string name="member_name_hint">Nom</string>
+    <string name="add_member">Ajouter un Membre</string>
+    <string name="create_group">Creer un Groupe</string>
+
+    <string name="pref_header_groups">Groupes</string>
+    <string name="pref_title_default_recipient">Destinataire par defaut</string>
+    <string name="pref_default_display_name">defaut@email.com</string>
+
+    <string name="pref_title_add_friends_to_messages">Add Group</string>
+
+    <string name="title_activity_group">Parametres</string>
+
+    <string name="pref_header_settings">Parametres</string>
+</resources>
