@@ -27,30 +27,53 @@
 
     <!-- Strings related to Settings -->
 
-    <!-- Example General settings -->
+    <!-- Group settings -->
     <string name="pref_header_groups">Groups</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
 
     <string name="pref_title_default_recipient">Default Recipient</string>
     <string name="pref_default_display_name">default@email.com</string>
 
-    <string name="pref_title_add_friends_to_messages">Add Group</string>
+    <string name="pref_title_add_friends_to_messages">Select Group</string>
     <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
+        <item>Group1</item>
+        <item>Group2</item>
+        <item>Group3</item>
     </string-array>
 
-    <!-- Example settings for Notifications -->
+	<!--Report settings-->
+	<string name="pref_header_report">Report</string>
+
+	<string name="date_format_title">Date Format</string>
+	<string-array name="date_formats">
+		<item>Mon, Jan 01 01:30 PM 'timezone'</item>
+		<item>Mon, Jan 01 01:30 PM</item>
+		<item>January 01, 2018 at 01:30 'timezone'</item>
+		<item>January 01, 2018 'timezone'</item>
+	</string-array>
+	<string-array name="date_format_strings">
+		<item>EEE, MMM dd hh:mm a z</item>
+		<item>EEE, MMM dd hh:mm a</item>
+		<item>M dd, y 'at' hh:mm a z</item>
+		<item>M dd, y z</item>
+	</string-array>
+
+	<string name="subject_format_title">Subject Style</string>
+	<string-array name="subject_formats">
+		<item>Field Assistant - Location</item>
+		<item>Field Assistant - Date</item>
+		<item>Field Assistant</item>
+		<item>Date</item>
+		<item>Location</item>
+	</string-array>
+	<string-array name="subject_formats_index">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+	</string-array>
+
+    <!-- Settings Header -->
     <string name="pref_header_settings">Settings</string>
 
 </resources>

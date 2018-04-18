@@ -145,9 +145,29 @@ class Report2Activity : AppCompatActivity() {
     }
 
     private fun send() {
+        val groups = PreferenceManager.getDefaultSharedPreferences(this)
         val emailList = arrayOf(report.getRecipient())
         val reportText = getReportString()
-        val subject = "Field Assistant - " + getLocationString(false)
+        var subject: String = ""
+
+        //change subject style based on settings
+        when(Integer.parseInt(groups.getString("subject_style", "0"))) {
+            0 -> {
+                subject = "Field Assistant - " + getLocationString(false)
+            }
+            1 -> {
+                subject = "Field Assistant - " + getDateString()
+            }
+            2 -> {
+                subject = "Field Assistant"
+            }
+            3 -> {
+                subject = getDateString()
+            }
+            4 -> {
+                subject = getLocationString(false)
+            }
+        }
         photoUri = report.getUri()
 
         try{
@@ -174,11 +194,17 @@ class Report2Activity : AppCompatActivity() {
 
         val message = report.getMessage() + "\n"
 
-        val dateFormat = "EEE, MMM dd hh:mm aa z"
-        val dateString = DateFormat.format(dateFormat, report.getDate()).toString() + "\n"
+        val dateString = getDateString() + "\n"
         val locationString = getLocationString(true)
 
         return message + "\n" + dateString + locationString + "\n"
+    }
+
+    fun getDateString(): String {
+        val groups = PreferenceManager.getDefaultSharedPreferences(this)
+        val dateFormat: String = groups.getString("date_format", "EEE, MMM dd hh:mm aa z")
+
+        return DateFormat.format(dateFormat, report.getDate()).toString()
     }
 
     fun getLocationString(full: Boolean): String {
