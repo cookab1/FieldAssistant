@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.getExternalStoragePublicDirectory
+import android.os.Handler
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.view.Menu
@@ -34,6 +35,11 @@ class Report1Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Handler().postDelayed({
+            val intent = Intent(this, SplashPage::class.java)
+            startActivity(intent)
+        }, 500)
 
         ReportManager.get.setContext(this)
         setContentView(R.layout.report1)
