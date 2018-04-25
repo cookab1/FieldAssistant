@@ -41,10 +41,11 @@ class Report2Activity : AppCompatActivity() {
     private lateinit var report: Report
     private var photoUri: Uri? = null
     private lateinit var locationManager: LocationManager
+    private var locationStyle: Int = 3
     //define the listener
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            location_text.text = getLocationString(false)
+            location_text.text = getLocationString(1)
             report.setLocation(location)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -146,28 +147,15 @@ class Report2Activity : AppCompatActivity() {
 
     private fun send() {
         val groups = PreferenceManager.getDefaultSharedPreferences(this)
+        locationStyle = Integer.parseInt(groups.getString("location_format", "3"))
+
         val emailList = arrayOf(report.getRecipient())
         val reportText = getReportString()
         var subject: String = ""
 
-        //change subject style based on settings
-        when(Integer.parseInt(groups.getString("subject_style", "0"))) {
-            0 -> {
-                subject = "Field Assistant - " + getLocationString(false)
-            }
-            1 -> {
-                subject = "Field Assistant - " + getDateString()
-            }
-            2 -> {
-                subject = "Field Assistant"
-            }
-            3 -> {
-                subject = getDateString()
-            }
-            4 -> {
-                subject = getLocationString(false)
-            }
-        }
+
+        //set subject style based on settings
+        subject = groups.getString("default_subject", "Field Assistant")
         photoUri = report.getUri()
 
         try{
@@ -195,7 +183,7 @@ class Report2Activity : AppCompatActivity() {
         val message = report.getMessage() + "\n"
 
         val dateString = getDateString() + "\n"
-        val locationString = getLocationString(true)
+        val locationString = getLocationString(locationStyle)
 
         return message + "\n" + dateString + locationString + "\n"
     }
@@ -207,7 +195,7 @@ class Report2Activity : AppCompatActivity() {
         return DateFormat.format(dateFormat, report.getDate()).toString()
     }
 
-    fun getLocationString(full: Boolean): String {
+    fun getLocationString(style: Int): String {
         val geocoder : Geocoder = Geocoder(this)
         val locationData : List<Address>
         var locationString : String = ""
@@ -217,16 +205,30 @@ class Report2Activity : AppCompatActivity() {
             val longitude = report.getLocation()!!.longitude
 
             locationData = geocoder.getFromLocation(latitude, longitude, 1)
+
+            if(style == 0) //only country
+                return locationData.get(0).countryName
+
+            //add city, (state), and country
             locationString += locationData.get(0).locality + ",  "
-            if(locationData.get(0).adminArea != null)
+            if(locationData.get(0).adminArea != null) //if there is a state, add it
                 locationString += locationData.get(0).adminArea + " \n"
             locationString += locationData.get(0).countryName
-            if(!full)
+
+            if(style == 1) //city, state, country
                 return locationString
-            locationString += "\nlon: " + longitude + ", lat: " + latitude + "\n"
+
+            //add lon and lat
+            var lonandlat = "lon: " + longitude + ", lat: " + latitude + "\n"
+
+            if(style == 2) //only lon and lat
+                return lonandlat
+
+            //add lon and lat
+            locationString += "\n" + lonandlat
         }
         else
-            return "No location given.\n\n"
+            return "NO LOCATION\n\n"
         return locationString
     }
 
@@ -260,7 +262,7 @@ class Report2Activity : AppCompatActivity() {
         val location = locationManager.getLastKnownLocation("gps")
         if (location != null) {
             report.setLocation(location)
-            location_text.text = getLocationString(false)
+            location_text.text = getLocationString(1)
         }
     }
 
@@ -280,7 +282,7 @@ class Report2Activity : AppCompatActivity() {
                     val location = locationManager.getLastKnownLocation("gps")
                     if(location != null) {
                         report.setLocation(location)
-                        location_text.text = getLocationString(false)
+                        location_text.text = getLocationString(1)
                     }
                 } catch(ex: SecurityException) {
                     Log.d("myTag", "Security Exception, no location available")

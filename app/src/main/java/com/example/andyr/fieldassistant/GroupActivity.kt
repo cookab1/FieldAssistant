@@ -15,6 +15,7 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
 import android.preference.RingtonePreference
+import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.MenuItem
 import android.support.v4.app.NavUtils
@@ -76,37 +77,8 @@ class GroupActivity : AppCompatPreferenceActivity() {
      */
     override fun isValidFragment(fragmentName: String): Boolean {
         return PreferenceFragment::class.java.name == fragmentName
-                || GroupsPreferenceFragment::class.java.name == fragmentName
                 || ReportPreferenceFragment::class.java.name == fragmentName
-    }
-
-    /**
-     * This fragment shows general preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    class GroupsPreferenceFragment : PreferenceFragment() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.pref_groups)
-            setHasOptionsMenu(true)
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("default_recipient"))
-            bindPreferenceSummaryToValue(findPreference("example_list"))
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            val id = item.itemId
-            if (id == android.R.id.home) {
-                startActivity(Intent(activity, GroupActivity::class.java))
-                return true
-            }
-            return super.onOptionsItemSelected(item)
-        }
+                || CreditsPreferenceFragment::class.java.name == fragmentName
     }
 
     /**
@@ -124,8 +96,10 @@ class GroupActivity : AppCompatPreferenceActivity() {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("subject_style"))
+            bindPreferenceSummaryToValue(findPreference("default_recipient"))
+            bindPreferenceSummaryToValue(findPreference("default_subject"))
             bindPreferenceSummaryToValue(findPreference("date_format"))
+            bindPreferenceSummaryToValue(findPreference("location_format"))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -143,17 +117,16 @@ class GroupActivity : AppCompatPreferenceActivity() {
      */
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    class SettingsPreferenceFragment : PreferenceFragment() {
+    class CreditsPreferenceFragment : PreferenceFragment() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            //addPreferencesFromResource(R.xml.pref_settings)
+            addPreferencesFromResource(R.xml.pref_credits)
             setHasOptionsMenu(true)
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("settings_new_message_ringtone"))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {

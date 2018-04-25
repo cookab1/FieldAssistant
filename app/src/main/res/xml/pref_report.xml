@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-    <ListPreference
-        android:defaultValue="0"
-        android:key="subject_style"
-        android:entries="@array/subject_formats"
-        android:entryValues="@array/subject_formats_index"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
+    <!--Default Recipient-->
+    <EditTextPreference
+        android:defaultValue=" "
+        android:key="default_recipient"
+        android:maxLines="1"
+        android:hint="@string/default_recipient_hint"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="@string/default_recipient_title" />
+
+    <!--Default Subject-->
+    <EditTextPreference
+        android:defaultValue=" "
+        android:key="default_subject"
+        android:hint="@string/subject_format_hint"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:title="@string/subject_format_title" />
 
-    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-         dismiss it. -->
-    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <!--Prefered Date Format-->
     <ListPreference
         android:defaultValue="EEE, MMM dd hh:mm aa z"
         android:entries="@array/date_formats"
@@ -24,7 +30,14 @@
         android:positiveButtonText="@null"
         android:title="@string/date_format_title" />
 
-    <!--android:capitalize="words"-->
-    <!--android:inputType="textCapWords"-->
+    <!--Prefered Location Format-->
+    <ListPreference
+        android:defaultValue="3"
+        android:entries="@array/location_formats"
+        android:entryValues="@array/location_format_index"
+        android:key="location_format"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/location_format_title" />
 
 </PreferenceScreen>
