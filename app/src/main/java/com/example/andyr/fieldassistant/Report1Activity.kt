@@ -92,6 +92,7 @@ class Report1Activity : AppCompatActivity() {
 
         ReportManager.get.addReport(report)
         intent.putExtra("UUID", report.getId())
+        intent.putExtra("image_code", requestCode)
 
         startActivity(intent)
     }
@@ -117,7 +118,7 @@ class Report1Activity : AppCompatActivity() {
 
         if(photoFile != null) {
             val photoUri: Uri = FileProvider.getUriForFile(this,
-                    "com.example.andyr.fieldassistant", photoFile)
+                    "com.example.andyr.fieldassistant", photoFile!!)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
             report.setUri(photoUri)
         }

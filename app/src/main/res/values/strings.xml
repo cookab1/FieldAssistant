@@ -33,12 +33,12 @@
     <string name="pref_title_default_recipient">Default Recipient</string>
     <string name="pref_default_display_name">default@email.com</string>
 
-    <string name="pref_title_add_friends_to_messages">Select Group</string>
-    <string-array name="pref_example_list_titles">
-        <item>Group1</item>
-        <item>Group2</item>
-        <item>Group3</item>
-    </string-array>
+    <!--<string name="pref_title_add_friends_to_messages">Select Group</string>-->
+    <!--<string-array name="pref_example_list_titles">-->
+        <!--<item>Group1</item>-->
+        <!--<item>Group2</item>-->
+        <!--<item>Group3</item>-->
+    <!--</string-array>-->
 
 	<!--Report settings-->
 	<string name="pref_header_report">Report</string>

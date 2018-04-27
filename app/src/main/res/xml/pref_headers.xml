@@ -9,7 +9,7 @@
 
     <header
         android:fragment="com.example.andyr.fieldassistant.GroupActivity$ReportPreferenceFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/report"
         android:title="@string/pref_header_report" />
 
 </preference-headers>

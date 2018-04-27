@@ -36,6 +36,8 @@ import java.util.*
 class Report2Activity : AppCompatActivity() {
     
     private val LOCATION_REQUEST_CODE = 10
+    private val TAKE_PHOTO_REQUEST_CODE = 1
+    private val IMAGE_GALLERY_REQUEST_CODE = 2
 
     private val SEND_CODE = 2
     private lateinit var report: Report
@@ -84,7 +86,10 @@ class Report2Activity : AppCompatActivity() {
 
     fun initializeView(data : Report) {
         //set the image
-        field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
+        if(intent.getIntExtra("image_code", 0) == IMAGE_GALLERY_REQUEST_CODE)
+            field_image_3.setImageBitmap(BitmapSender.instance.getBitmap()!!)
+        else
+            field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
         val groups = PreferenceManager.getDefaultSharedPreferences(this)
 
         //if there's a message, set the message
@@ -106,9 +111,7 @@ class Report2Activity : AppCompatActivity() {
         //initialize the date and time
         val calendar: Calendar = Calendar.getInstance()
         report.setDate(calendar.time)
-        val dateFormat = "EEE, MMM dd hh:mm"
-        val dateString = DateFormat.format(dateFormat, report.getDate()).toString()
-        date_text.setText(dateString)
+        date_text.setText(getDateString())
 
         //set the location services to get location updates
         setupLocation()
@@ -302,11 +305,10 @@ class Report2Activity : AppCompatActivity() {
             ex.printStackTrace()
         }
         val orientation = exif!!.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
-        var matrix: Matrix = Matrix()
+        val matrix: Matrix = Matrix()
         when(orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
             ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
-            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
         }
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }

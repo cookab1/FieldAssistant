@@ -27,9 +27,42 @@
     <string name="pref_title_default_recipient">Destinataire par defaut</string>
     <string name="pref_default_display_name">defaut@email.com</string>
 
-    <string name="pref_title_add_friends_to_messages">Add Group</string>
+    <!--<string name="pref_title_add_friends_to_messages">Add Group</string>-->
 
     <string name="title_activity_group">Parametres</string>
 
     <string name="pref_header_settings">Parametres</string>
+
+    <!--Report settings-->
+    <string name="pref_header_report">Rapport</string>
+
+    <string name="date_format_title">Format de date</string>
+    <string-array name="date_formats">
+        <item>Lun, Jan 01 01:30 PM 'fuseau horaire'</item>
+        <item>Lun, Jan 01 01:30 PM</item>
+        <item> 01 Janvier 2018 01:30 'fuseau horaire'</item>
+        <item> 01 Janvier 2018 'fuseau horaire'</item>
+    </string-array>
+    <string-array name="date_format_strings">
+        <item>EEE, MMM dd kk:mm a z</item>
+        <item>EEE, MMM dd kk:mm a</item>
+        <item>dd MMMM yyyy kk:mm z</item>
+        <item>dd MMMM yyyy z</item>
+    </string-array>
+
+    <string name="subject_format_title">Style de sujet</string>
+    <string-array name="subject_formats">
+        <item>Field Assistant - Destinataire</item>
+        <item>Field Assistant - Date</item>
+        <item>Field Assistant</item>
+        <item>Date</item>
+        <item>Destinataire</item>
+    </string-array>
+    <string-array name="subject_formats_index">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>
