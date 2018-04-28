@@ -24,8 +24,6 @@
     <string name="create_group">Creer un Groupe</string>
 
     <string name="pref_header_groups">Groupes</string>
-    <string name="pref_title_default_recipient">Destinataire par defaut</string>
-    <string name="pref_default_display_name">defaut@email.com</string>
 
     <!--<string name="pref_title_add_friends_to_messages">Add Group</string>-->
 
@@ -35,6 +33,9 @@
 
     <!--Report settings-->
     <string name="pref_header_report">Rapport</string>
+
+    <string name="default_recipient_title">Destinataire par defaut</string>
+    <string name="default_recipient_hint">defaut@email.com</string>
 
     <string name="date_format_title">Format de date</string>
     <string-array name="date_formats">
@@ -50,19 +51,22 @@
         <item>dd MMMM yyyy z</item>
     </string-array>
 
-    <string name="subject_format_title">Style de sujet</string>
-    <string-array name="subject_formats">
-        <item>Field Assistant - Destinataire</item>
-        <item>Field Assistant - Date</item>
-        <item>Field Assistant</item>
-        <item>Date</item>
-        <item>Destinataire</item>
+    <string name="location_format_title">Format d\'emplacement</string>
+    <string-array name="location_formats">
+        <item>Pays</item>
+        <item>Ville, (Etat), Pays</item>
+        <item>Longitude et Latitude</item>
+        <item>Tout ce qui précède</item>
     </string-array>
-    <string-array name="subject_formats_index">
+    <string-array name="location_format_index">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
-        <item>4</item>
     </string-array>
+
+    <string name="subject_format_title">Ligne par défaut</string>
+    <string name="subject_format_hint">Définir le sujet par défaut</string>
+
+    <string name="pref_header_credits">About</string>
 </resources>

@@ -66,10 +66,10 @@ class Report1Activity : AppCompatActivity() {
             //everything processed correctly
             if(requestCode == IMAGE_GALLERY_REQUEST_CODE) {
                 //hearing back from the image gallery
-                var imageUri: Uri = data!!.data
+                val imageUri: Uri = data!!.data
                 report.setUri(imageUri)
 
-                var inputStream: InputStream
+                val inputStream: InputStream
 
                 try {
                     inputStream = contentResolver.openInputStream(imageUri)
@@ -99,12 +99,12 @@ class Report1Activity : AppCompatActivity() {
     }
 
     private fun openPhotos() {
-        var photoPickerIntent: Intent = Intent(Intent.ACTION_PICK)
+        val photoPickerIntent: Intent = Intent(Intent.ACTION_PICK)
 
-        var pictureDirectory: File = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-        var pictureDirectoryPath: String = pictureDirectory.path
+        val pictureDirectory: File = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val pictureDirectoryPath: String = pictureDirectory.path
 
-        var photoUri: Uri = Uri.parse(pictureDirectoryPath)
+        val photoUri: Uri = Uri.parse(pictureDirectoryPath)
 
         photoPickerIntent.setDataAndType(photoUri, "image/*")
 
@@ -119,7 +119,7 @@ class Report1Activity : AppCompatActivity() {
 
         if(photoFile != null) {
             val photoUri: Uri = FileProvider.getUriForFile(this,
-                    "com.example.andyr.fieldassistant", photoFile!!)
+                    "com.andy.fieldassistant", photoFile!!)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
             report.setUri(photoUri)
         }

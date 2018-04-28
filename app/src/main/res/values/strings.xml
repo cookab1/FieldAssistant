@@ -22,6 +22,8 @@
     <string name="add_member">Add Member</string>
     <string name="create_group">Create Group</string>
 
+    <string name="no_wifi_text">Wifi needed to get city and country.</string>
+
 
     <string name="title_activity_group">Settings</string>
 

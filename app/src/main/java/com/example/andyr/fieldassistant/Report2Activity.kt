@@ -2,6 +2,7 @@ package com.andy.fieldassistant
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -10,6 +11,7 @@ import android.graphics.Matrix
 import android.location.*
 import android.media.ExifInterface
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.ActivityCompat
@@ -47,7 +49,8 @@ class Report2Activity : AppCompatActivity() {
     //define the listener
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            location_text.text = getLocationString(1)
+            if(location_text.text == R.string.location_hint.toString() )
+                location_text.text = getLocationString(1)
             report.setLocation(location)
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
@@ -80,8 +83,7 @@ class Report2Activity : AppCompatActivity() {
             }
         }
         location_button.setOnClickListener {
-            setLocationText()
-            //Toast.makeText(this, "Permission supposedly Granted", Toast.LENGTH_LONG).show()
+            location_text.text = getLocationString(1)
         }
     }
 
@@ -207,22 +209,30 @@ class Report2Activity : AppCompatActivity() {
             val latitude = report.getLocation()!!.latitude
             val longitude = report.getLocation()!!.longitude
 
-            locationData = geocoder.getFromLocation(latitude, longitude, 1)
+            val wifiManager = getApplicationContext().getSystemService(WIFI_SERVICE) as WifiManager
 
-            if(style == 0) //only country
-                return locationData.get(0).countryName
+            if(wifiManager.isWifiEnabled) {
+                locationData = geocoder.getFromLocation(latitude, longitude, 1)
 
-            //add city, (state), and country
-            locationString += locationData.get(0).locality + ",  "
-            if(locationData.get(0).adminArea != null) //if there is a state, add it
-                locationString += locationData.get(0).adminArea + " \n"
-            locationString += locationData.get(0).countryName
+                if (style == 0) //only country
+                    return locationData.get(0).countryName
 
-            if(style == 1) //city, state, country
-                return locationString
+                //add city, (state), and country
+                locationString += locationData.get(0).locality + ",  "
+                if (locationData.get(0).adminArea != null) //if there is a state, add it
+                    locationString += locationData.get(0).adminArea + " \n"
+                locationString += locationData.get(0).countryName
 
+                if (style == 1) //city, state, country
+                    return locationString
+
+            }
+            else {
+                Toast.makeText(this, R.string.no_wifi_text, Toast.LENGTH_LONG).show()
+                return "lon: " + longitude + "\n lat: " + latitude + "\n"
+            }
             //add lon and lat
-            var lonandlat = "lon: " + longitude + ", lat: " + latitude + "\n"
+            val lonandlat = "lon: " + longitude + ", lat: " + latitude + "\n"
 
             if(style == 2) //only lon and lat
                 return lonandlat
