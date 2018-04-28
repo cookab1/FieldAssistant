@@ -25,6 +25,9 @@
 
     <string name="pref_header_groups">Groupes</string>
 
+    <string name="no_wifi_text">Wifi nécessaire pour obtenir la ville et le pays.</string>
+    <string name="no_default_set">Aucun jeu par défaut</string>
+
     <!--<string name="pref_title_add_friends_to_messages">Add Group</string>-->
 
     <string name="title_activity_group">Parametres</string>
@@ -39,16 +42,16 @@
 
     <string name="date_format_title">Format de date</string>
     <string-array name="date_formats">
-        <item>Lun, Jan 01 01:30 PM 'fuseau horaire'</item>
-        <item>Lun, Jan 01 01:30 PM</item>
-        <item> 01 Janvier 2018 01:30 'fuseau horaire'</item>
-        <item> 01 Janvier 2018 'fuseau horaire'</item>
+        <item>Jan 01, 2018 01:30 PM</item>
+        <item>Lun 01 Jan 14:30</item>
+        <item>01 Janvier 2018 14:30 'fuseau horaire'</item>
+        <item>01 Janvier 2018</item>
     </string-array>
     <string-array name="date_format_strings">
-        <item>EEE, MMM dd kk:mm a z</item>
-        <item>EEE, MMM dd kk:mm a</item>
+        <item>MMM dd, yyyy hh:mm a</item>
+        <item>EEE, dd MMM kk:mm</item>
         <item>dd MMMM yyyy kk:mm z</item>
-        <item>dd MMMM yyyy z</item>
+        <item>dd MMMM yyyy</item>
     </string-array>
 
     <string name="location_format_title">Format d\'emplacement</string>

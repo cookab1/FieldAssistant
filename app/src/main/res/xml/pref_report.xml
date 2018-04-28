@@ -22,7 +22,7 @@
 
     <!--Prefered Date Format-->
     <ListPreference
-        android:defaultValue="EEE, MMM dd hh:mm aa z"
+        android:defaultValue="MMM dd, yyyy hh:mm a"
         android:entries="@array/date_formats"
         android:entryValues="@array/date_format_strings"
         android:key="date_format"

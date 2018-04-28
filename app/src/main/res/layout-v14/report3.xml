@@ -31,6 +31,7 @@
 		android:gravity="center"
 		android:text="@string/date_hint"
 		android:textSize="18sp"
+		android:lines="1"
 		app:layout_constraintBottom_toTopOf="@+id/location_text"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@+id/field_image_3"

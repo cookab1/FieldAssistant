@@ -2,6 +2,7 @@ package com.andy.fieldassistant
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -41,6 +42,8 @@ class Report2Activity : AppCompatActivity() {
     private val TAKE_PHOTO_REQUEST_CODE = 1
     private val IMAGE_GALLERY_REQUEST_CODE = 2
 
+    private var dialogCalled = false
+
     private val SEND_CODE = 2
     private lateinit var report: Report
     private var photoUri: Uri? = null
@@ -69,7 +72,7 @@ class Report2Activity : AppCompatActivity() {
         ReportManager.get.setContext(this)
 
         change_button.setOnClickListener {
-            val groups = PreferenceManager.getDefaultSharedPreferences(this)
+            val settings = PreferenceManager.getDefaultSharedPreferences(this)
             if(display_default.visibility == View.VISIBLE) {
                 display_default.visibility = View.INVISIBLE
                 choose_recipient.visibility = View.VISIBLE
@@ -78,7 +81,7 @@ class Report2Activity : AppCompatActivity() {
             } else {
                 display_default.visibility = View.VISIBLE
                 choose_recipient.visibility = View.INVISIBLE
-                report.setRecipient(groups.getString("default_recipient","no default set"))
+                report.setRecipient(settings.getString("default_recipient", R.string.no_default_set.toString()))
                 change_button.setText(R.string.change_recipient)
             }
         }
@@ -88,12 +91,12 @@ class Report2Activity : AppCompatActivity() {
     }
 
     fun initializeView(data : Report) {
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
         //set the image
         if(intent.getIntExtra("image_code", 0) == IMAGE_GALLERY_REQUEST_CODE)
             field_image_3.setImageBitmap(BitmapSender.instance.getBitmap()!!)
         else
             field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
-        val groups = PreferenceManager.getDefaultSharedPreferences(this)
 
         //if there's a message, set the message
         if(data.getMessage() != null)
@@ -106,9 +109,9 @@ class Report2Activity : AppCompatActivity() {
         } else {
             display_default.visibility = View.VISIBLE
             choose_recipient.visibility = View.INVISIBLE
-            report.setRecipient(groups.getString("default_recipient","no default set"))
+            report.setRecipient(settings.getString("default_recipient","no default set"))
         }
-        display_default.setText(groups.getString("default_recipient", "no default set"))
+        display_default.setText(settings.getString("default_recipient", "no default set"))
 
 
         //initialize the date and time
@@ -151,35 +154,42 @@ class Report2Activity : AppCompatActivity() {
     }
 
     private fun send() {
-        val groups = PreferenceManager.getDefaultSharedPreferences(this)
-        locationStyle = Integer.parseInt(groups.getString("location_format", "3"))
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+        locationStyle = Integer.parseInt(settings.getString("location_format", "3"))
+        if((settings.getString("default_recipient", "no default").equals("no default") ||
+                settings.getString("default_recipient", "no default").equals("")) &&
+                dialogCalled == false && !choose_recipient.text.toString().equals(""))
+            askToSetDefaultRecipient()
+        else {
 
-        val emailList = arrayOf(report.getRecipient())
-        val reportText = getReportString()
-        var subject: String = ""
+            val emailList = arrayOf(report.getRecipient())
+            val reportText = getReportString()
+            var subject: String = ""
 
 
-        //set subject style based on settings
-        subject = groups.getString("default_subject", "Field Assistant")
-        photoUri = report.getUri()
+            //set subject style based on settings
+            subject = settings.getString("default_subject", "Field Assistant")
+            photoUri = report.getUri()
 
-        try{
+            try {
 
-            val intent: Intent = Intent(Intent.ACTION_SEND)
-            intent.type = "plain/text"
+                val intent: Intent = Intent(Intent.ACTION_SEND)
+                intent.type = "plain/text"
 
-            if (emailList[0] != null)
-                intent.putExtra(Intent.EXTRA_EMAIL, emailList)
+                if (emailList[0] != null && !emailList[0].equals(R.string.no_default_set.toString()))
+                    intent.putExtra(Intent.EXTRA_EMAIL, emailList)
                 intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-            if (reportText != null) 
-                intent.putExtra(Intent.EXTRA_TEXT, reportText)
-            if (photoUri != null) 
-                intent.putExtra(Intent.EXTRA_STREAM, photoUri)
-            
-            //intent = Intent.createChooser(intent, getString(R.string.send_report))
-            startActivityForResult(intent, SEND_CODE)
-        } catch (t : Throwable){
-            Toast.makeText(this, "Request failed: " + t.toString(), Toast.LENGTH_LONG).show()
+                if (reportText != null)
+                    intent.putExtra(Intent.EXTRA_TEXT, reportText)
+                if (photoUri != null)
+                    intent.putExtra(Intent.EXTRA_STREAM, photoUri)
+
+                //intent = Intent.createChooser(intent, getString(R.string.send_report))
+                startActivityForResult(intent, SEND_CODE)
+            } catch (t: Throwable) {
+                Toast.makeText(this, "Request failed: " + t.toString(), Toast.LENGTH_LONG).show()
+            }
+            dialogCalled = false
         }
     }
 
@@ -194,8 +204,8 @@ class Report2Activity : AppCompatActivity() {
     }
 
     fun getDateString(): String {
-        val groups = PreferenceManager.getDefaultSharedPreferences(this)
-        val dateFormat: String = groups.getString("date_format", "EEE, MMM dd hh:mm aa z")
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+        val dateFormat: String = settings.getString("date_format", "EEE, MMM dd hh:mm aa z")
 
         return DateFormat.format(dateFormat, report.getDate()).toString()
     }
@@ -243,6 +253,44 @@ class Report2Activity : AppCompatActivity() {
         else
             return "NO LOCATION\n\n"
         return locationString
+    }
+
+    fun askToSetDefaultRecipient() {
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+
+        var message = "Make "
+        message += choose_recipient.text.toString()
+        message += " default recipient."
+
+        // Initialize a new instance of
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Set Default Recipient")
+        builder.setMessage(message)
+
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("YES"){dialog, which ->
+            // Do something when user press the positive button
+            Toast.makeText(applicationContext,"Default Recipient Set",Toast.LENGTH_SHORT).show()
+
+            //set default recipient
+            val editor: SharedPreferences.Editor = settings.edit()
+            editor.putString("default_recipient", choose_recipient.text.toString())
+            editor.apply()
+
+            dialogCalled = true
+            send()
+        }
+
+        // Display a negative button on alert dialog
+        builder.setNegativeButton("No"){dialog, which ->
+            Toast.makeText(applicationContext,"Default Recipient Not Set",Toast.LENGTH_SHORT).show()
+            dialogCalled = true
+            send()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     fun setupLocation() {

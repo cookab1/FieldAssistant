@@ -23,6 +23,7 @@
     <string name="create_group">Create Group</string>
 
     <string name="no_wifi_text">Wifi needed to get city and country.</string>
+    <string name="no_default_set">No default set</string>
 
 
     <string name="title_activity_group">Settings</string>
@@ -47,16 +48,16 @@
 
     <string name="date_format_title">Date Format</string>
     <string-array name="date_formats">
-        <item>Mon, Jan 01 01:30 PM</item>
+        <item>Jan 01, 2018 01:30 PM</item>
         <item>Mon, Jan 01 01:30 PM \'timezone\'</item>
-        <item>January 01, 2018 at 01:30 \'timezone\'</item>
-        <item>January 01, 2018 \'timezone\'</item>
+        <item>January 01, 2018 at 01:30 PM \'timezone\'</item>
+        <item>January 01, 2018</item>
     </string-array>
     <string-array name="date_format_strings">
-        <item>EEE, MMM dd, yyyy hh:mm a</item>
+        <item>MMM dd, yyyy hh:mm a</item>
         <item>EEE, MMM dd, yyyy hh:mm a z</item>
-        <item>M dd, y 'at' hh:mm a z</item>
-        <item>M dd, y z</item>
+        <item>MMMM dd, yyyy \'at\' hh:mm a z</item>
+        <item>MMMM dd, yyyy</item>
     </string-array>
 
     <string name="location_format_title">location Format</string>
