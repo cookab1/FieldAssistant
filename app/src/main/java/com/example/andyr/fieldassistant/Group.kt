@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant
+package com.andy.fieldassistant
 
 /**
  * Created by andyr on 3/6/2018.

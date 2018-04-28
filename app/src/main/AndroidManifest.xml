@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.andyr.fieldassistant">
+    package="com.andy.fieldassistant">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -19,7 +19,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -28,7 +28,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.andyr.fieldassistant"
+            android:authorities="com.andy.fieldassistant"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -42,7 +42,14 @@
             android:parentActivityName=".Report1Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.andyr.fieldassistant.Report1Activity" />
+                android:value="com.andy.fieldassistant.Report1Activity" />
+        </activity>
+        <activity android:name="com.andy.fieldassistant.SplashPage" android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -1,7 +1,7 @@
-package com.example.andyr.fieldassistant.reportDatabase
+package com.andy.fieldassistant.reportDatabase
 
 import android.database.sqlite.SQLiteDatabase
-import com.example.andyr.fieldassistant.reportDatabase.ReportSchema.ReportTable
+import com.andy.fieldassistant.reportDatabase.ReportSchema.ReportTable
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 

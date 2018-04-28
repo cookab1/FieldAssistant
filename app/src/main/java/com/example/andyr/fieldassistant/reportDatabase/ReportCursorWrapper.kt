@@ -1,11 +1,11 @@
-package com.example.andyr.fieldassistant.reportDatabase
+package com.andy.fieldassistant.reportDatabase
 
 import android.database.Cursor
 import android.database.CursorWrapper
 import android.location.Location
-import com.example.andyr.fieldassistant.Group
-import com.example.andyr.fieldassistant.Report
-import com.example.andyr.fieldassistant.reportDatabase.ReportSchema.ReportTable
+import com.andy.fieldassistant.Group
+import com.andy.fieldassistant.Report
+import com.andy.fieldassistant.reportDatabase.ReportSchema.ReportTable
 import java.util.*
 
 

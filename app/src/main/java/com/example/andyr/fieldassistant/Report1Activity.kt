@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant
+package com.andy.fieldassistant
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.getExternalStoragePublicDirectory
+import android.os.Handler
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.view.Menu
@@ -34,9 +35,9 @@ class Report1Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.report1)
 
         ReportManager.get.setContext(this)
-        setContentView(R.layout.report1)
 
         field_camera.setOnClickListener { takePictureWithCamera() }
         field_photos.setOnClickListener { openPhotos() }

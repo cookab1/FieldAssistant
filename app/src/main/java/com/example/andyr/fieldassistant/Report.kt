@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant
+package com.andy.fieldassistant
 
 import android.location.Location
 import android.net.Uri

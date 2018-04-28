@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant
+package com.andy.fieldassistant
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
@@ -7,9 +7,9 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.widget.Toast
-import com.example.andyr.fieldassistant.reportDatabase.ReportCursorWrapper
-import com.example.andyr.fieldassistant.reportDatabase.ReportDatabaseHelper
-import com.example.andyr.fieldassistant.reportDatabase.ReportSchema
+import com.andy.fieldassistant.reportDatabase.ReportCursorWrapper
+import com.andy.fieldassistant.reportDatabase.ReportDatabaseHelper
+import com.andy.fieldassistant.reportDatabase.ReportSchema
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList

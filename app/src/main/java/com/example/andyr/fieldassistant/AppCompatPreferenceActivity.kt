@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant
+package com.andy.fieldassistant
 
 import android.content.res.Configuration
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.andyr.fieldassistant.reportDatabase
+package com.andy.fieldassistant.reportDatabase
 
 /**
  * Created by andyr on 3/6/2018.

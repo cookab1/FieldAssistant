@@ -1,15 +1,13 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- These settings headers are only used on tablets. -->
-
     <header
-        android:fragment="com.example.andyr.fieldassistant.GroupActivity$GroupsPreferenceFragment"
-        android:icon="@drawable/groups"
-        android:title="@string/pref_header_groups" />
-
-    <header
-        android:fragment="com.example.andyr.fieldassistant.GroupActivity$ReportPreferenceFragment"
+        android:fragment="com.andy.fieldassistant.GroupActivity$ReportPreferenceFragment"
         android:icon="@drawable/report"
         android:title="@string/pref_header_report" />
+
+    <header
+        android:fragment="com.andy.fieldassistant.GroupActivity$CreditsPreferenceFragment"
+        android:icon="@drawable/groups"
+        android:title="@string/pref_header_credits" />
 
 </preference-headers>
