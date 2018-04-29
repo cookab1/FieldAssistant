@@ -1,3 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-<resources></resources>
+    <string name="app_name">Field Assistant</string>
+    <string name="default_recipient">Destinatario predeterminado</string>
+    <string name="change_recipient">Cambio</string>
+    <string name="return_default">Defecto</string>
+    <string name="send_message">ENVIAR</string>
+    <string name="use_camera">Cámara</string>
+    <string name="from_photos">Galeria</string>
+
+    <string name="message_hint">Ingresar mensaje</string>
+    <string name="email_hint">Receptor de E-mail</string>
+    <string name="location_hint">SIN UBICACIÓN</string>
+    <string name="date_hint">SIN FECHA</string>
+
+    <string name="manage_label">Administrar aplicación</string>
+
+    <string name="no_wifi_text">Wifi necesario para obtener la ciudad y el país.</string>
+    <string name="no_default_set">Sin conjunto predeterminado</string>
+
+
+    <string name="title_activity_group">Configuraciones</string>
+
+    <!-- Strings related to Settings -->
+    <string name="default_recipient_title">Destinatario predeterminado</string>
+    <string name="default_recipient_hint">defecto@email.com</string>
+
+    <!--Report settings-->
+    <string name="pref_header_report">Informe</string>
+
+    <string name="date_format_title">Formato de fecha</string>
+    <string-array name="date_formats">
+        <item>Ene 01, 2018 01:30 AM</item>
+        <item>Lun, Ene 01 01:30 AM \'zona horaria\'</item>
+        <item>Enero 01, 2018 01:30 AM \'zona horaria\'</item>
+        <item>Enero 01, 2018</item>
+    </string-array>
+    <string-array name="date_format_strings">
+        <item>MMM dd, yyyy hh:mm a</item>
+        <item>EEE, MMM dd, yyyy hh:mm a z</item>
+        <item>MMMM dd, yyyy hh:mm a z</item>
+        <item>MMMM dd, yyyy</item>
+    </string-array>
+
+    <string name="location_format_title">Formato de ubicación</string>
+    <string-array name="location_formats">
+        <item>País</item>
+        <item>Ciudad, (Estado), País</item>
+        <item>Longitud y latitud</item>
+        <item>Todas las anteriores</item>
+    </string-array>
+    <string-array name="location_format_index">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string name="subject_format_title">Línea de asunto predeterminada</string>
+    <string name="subject_format_hint">Establecer el tema predeterminado</string>
+
+    <!-- Settings Header -->
+    <string name="pref_header_settings">Configuraciones</string>
+    <string name="pref_header_credits">Créditos</string>
+
+    <string name="image_credits_title">Créditos de imagen</string>
+    <string-array name="image_credits">
+        <item>Icono de la cámara creado por Daniel Bruce desde www.flaticon.com</item>
+        <item>Icono de galeria creado por Creaticca Creative Agency desde www.flaticon.com</item>
+        <item>Icono de informe creado por Designerz Base desde www.flaticon.com</item>
+        <item>Icono de créditos creado por Freepik desde www.flaticon.com</item>
+        <item>Icono de Field Assistant creado por Blake Nelson, autor de la versión de IOS de Field Assistant</item>
+    </string-array>
+
+    <string name="special_thanks_title">Gracias especiales</string>
+    <string-array name="special_thanks">
+        <item>Gracias a Matt Cook por la idea de la aplicación.</item>
+        <item>Gracias a Samaritain\'s Purse por dar a conocer la necesidad de capturar esta información en un solo lugar. Espero que sea útil para muchos más usuarios que tú.</item>
+        <item>Gracias a Chad Waters por su ayuda pensando en la creación de la aplicación.</item>
+        <item>Gracias a Blake Nelson por escribir la versión de IOS de la aplicación, diseñar el logotipo y diseñar los diseños visuales.</item>
+    </string-array>
+
+</resources>
+
+    <!--<string name=""></string>-->

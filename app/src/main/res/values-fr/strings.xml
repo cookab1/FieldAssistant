@@ -15,15 +15,6 @@
     <string name="date_hint">AUCUNE DATE</string>
 
     <string name="manage_label">Gerer L\'application</string>
-    <string name="group_name_label">Nom de Groupe</string>
-    <string name="group_name_hint">Entre le nom</string>
-    <string name="group_members_label">Membres de Group</string>
-    <string name="member_email_hint">Adresse E-mail</string>
-    <string name="member_name_hint">Nom</string>
-    <string name="add_member">Ajouter un Membre</string>
-    <string name="create_group">Creer un Groupe</string>
-
-    <string name="pref_header_groups">Groupes</string>
 
     <string name="no_wifi_text">Wifi nécessaire pour obtenir la ville et le pays.</string>
     <string name="no_default_set">Aucun jeu par défaut</string>
@@ -44,7 +35,7 @@
     <string-array name="date_formats">
         <item>Jan 01, 2018 01:30 PM</item>
         <item>Lun 01 Jan 14:30</item>
-        <item>01 Janvier 2018 14:30 'fuseau horaire'</item>
+        <item>01 Janvier 2018 14:30 \'fuseau horaire\'</item>
         <item>01 Janvier 2018</item>
     </string-array>
     <string-array name="date_format_strings">
@@ -72,4 +63,21 @@
     <string name="subject_format_hint">Définir le sujet par défaut</string>
 
     <string name="pref_header_credits">About</string>
+
+    <string name="image_credits_title">Crédits d\'image</string>
+    <string-array name="image_credits">
+        <item>Icône de caméra faite par Daniel Bruce de www.flaticon.com</item>
+        <item>Icône de galerie faite par Creaticca Creative Agency à partir de www.flaticon.com</item>
+        <item>Icône de rapport réalisée par Designerz Base à partir de www.flaticon.com www.flaticon.com</item>
+        <item>Crédits icon réalisé par Freepik sur www.flaticon.com</item>
+        <item>Icône Field Assistant faite par Blake Nelson, l\'auteur de la version IOS de Field Assistant</item>
+    </string-array>
+
+    <string name="special_thanks_title">Remerciement spécial</string>
+    <string-array name="special_thanks">
+        <item>Merci à Matt Cook pour l\'idée de l\'application.</item>
+        <item>Merci à Samaritain\'s Purse pour avoir fait connaître la nécessité de saisir cette information en un seul endroit. J\'espère qu\'il est utile à beaucoup plus d\'utilisateurs que vous.</item>
+        <item>Merci à Chad Waters pour votre aide en pensant à la création de l\'application.</item>
+        <item>Merci à Blake Nelson d'avoir écrit la version IOS de l\'application, d\'avoir conçu le logo et d\'avoir conçu les mises en page visuelles.</item>
+    </string-array>
 </resources>

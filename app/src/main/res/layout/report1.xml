@@ -33,7 +33,7 @@
 		android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp"
 		android:layout_marginTop="8dp"
-		android:drawableTop="@drawable/picture"
+		android:drawableTop="@drawable/gallery"
 		android:paddingTop="40sp"
 		android:drawablePadding="-30sp"
 		android:text="@string/from_photos"

@@ -81,7 +81,7 @@ class Report2Activity : AppCompatActivity() {
             } else {
                 display_default.visibility = View.VISIBLE
                 choose_recipient.visibility = View.INVISIBLE
-                report.setRecipient(settings.getString("default_recipient", R.string.no_default_set.toString()))
+                report.setRecipient(settings.getString("default_recipient", "No Default Set"))
                 change_button.setText(R.string.change_recipient)
             }
         }
@@ -109,9 +109,11 @@ class Report2Activity : AppCompatActivity() {
         } else {
             display_default.visibility = View.VISIBLE
             choose_recipient.visibility = View.INVISIBLE
-            report.setRecipient(settings.getString("default_recipient","no default set"))
+            report.setRecipient(settings.getString("default_recipient", "No Default Set"))
         }
-        display_default.setText(settings.getString("default_recipient", "no default set"))
+        display_default.setText(settings.getString("default_recipient", R.string.no_default_set.toString()))
+        if(display_default.text.toString().equals(R.string.no_default_set.toString()))
+            display_default.setText(R.string.no_default_set)
 
 
         //initialize the date and time
@@ -176,7 +178,7 @@ class Report2Activity : AppCompatActivity() {
                 val intent: Intent = Intent(Intent.ACTION_SEND)
                 intent.type = "plain/text"
 
-                if (emailList[0] != null && !emailList[0].equals(R.string.no_default_set.toString()))
+                if (emailList[0] != null && !emailList[0].equals("No Default Set"))
                     intent.putExtra(Intent.EXTRA_EMAIL, emailList)
                 intent.putExtra(Intent.EXTRA_SUBJECT, subject)
                 if (reportText != null)

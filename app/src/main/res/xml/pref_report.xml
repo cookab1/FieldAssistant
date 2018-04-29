@@ -3,7 +3,6 @@
 
     <!--Default Recipient-->
     <EditTextPreference
-        android:defaultValue=" "
         android:key="default_recipient"
         android:maxLines="1"
         android:hint="@string/default_recipient_hint"
@@ -13,7 +12,6 @@
 
     <!--Default Subject-->
     <EditTextPreference
-        android:defaultValue=" "
         android:key="default_subject"
         android:hint="@string/subject_format_hint"
         android:selectAllOnFocus="true"
