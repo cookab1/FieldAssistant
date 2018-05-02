@@ -6,5 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="appColor">#598527</color>
     <color name="appColorDark">#507923</color>
-    <color name="appColorAccent">#ffa012</color>
+    <color name="appColorAccent">#000000</color>
 </resources>

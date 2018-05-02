@@ -95,6 +95,7 @@ class Report1Activity : AppCompatActivity() {
         intent.putExtra("UUID", report.getId())
         intent.putExtra("image_code", requestCode)
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent)
     }
 
@@ -108,6 +109,7 @@ class Report1Activity : AppCompatActivity() {
 
         photoPickerIntent.setDataAndType(photoUri, "image/*")
 
+        photoPickerIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST_CODE)
     }
 
@@ -123,6 +125,13 @@ class Report1Activity : AppCompatActivity() {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
             report.setUri(photoUri)
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(intent, TAKE_PHOTO_REQUEST_CODE)
+    }
+
+    //lifecycle overrides
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
     }
 }

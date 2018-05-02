@@ -1,5 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--put credits here-->
+    <PreferenceCategory
+        android:title="@string/comments_request"/>
 
 </PreferenceScreen>

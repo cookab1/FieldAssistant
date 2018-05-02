@@ -10,4 +10,7 @@
         android:icon="@drawable/groups"
         android:title="@string/pref_header_credits" />
 
+    <header
+        android:title="@string/comments_request" />
+
 </preference-headers>

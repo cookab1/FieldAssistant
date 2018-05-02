@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.location.*
@@ -14,6 +15,7 @@ import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -90,7 +92,7 @@ class Report2Activity : AppCompatActivity() {
     fun initializeView(data : Report) {
         //set the image
         if(intent.getIntExtra("image_code", 0) == IMAGE_GALLERY_REQUEST_CODE)
-            field_image_3.setImageBitmap(BitmapSender.instance.getBitmap()!!)
+            field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
         else
             field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
         val groups = PreferenceManager.getDefaultSharedPreferences(this)
@@ -145,6 +147,7 @@ class Report2Activity : AppCompatActivity() {
             //everything processed correctly
             if(requestCode == SEND_CODE) {
                 intent = Intent(this, Report1Activity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent)
             }
         }
@@ -175,7 +178,8 @@ class Report2Activity : AppCompatActivity() {
                 intent.putExtra(Intent.EXTRA_TEXT, reportText)
             if (photoUri != null) 
                 intent.putExtra(Intent.EXTRA_STREAM, photoUri)
-            
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             //intent = Intent.createChooser(intent, getString(R.string.send_report))
             startActivityForResult(intent, SEND_CODE)
         } catch (t : Throwable){
@@ -309,7 +313,8 @@ class Report2Activity : AppCompatActivity() {
     }
 
     private fun rotateImage(bitmap: Bitmap): Bitmap {
-        val fileLocation = ReportManager.get.getPhotoFile(report).absolutePath
+        //val fileLocation = ReportManager.get.getPhotoFile(report).absolutePath
+        val fileLocation = getRealPathFromURI(ReportSender.instance.getReport().getUri())
         var exif: ExifInterface? = null
         try {
             exif = ExifInterface(fileLocation)
@@ -321,8 +326,15 @@ class Report2Activity : AppCompatActivity() {
         when(orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
             ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
         }
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+    private fun getRealPathFromURI(uri: Uri?): String {
+        val cursor: Cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx)
     }
 
     private fun messageListener() {
@@ -359,5 +371,11 @@ class Report2Activity : AppCompatActivity() {
 
             }
         })
+    }
+
+    //lifecycle overrides
+    override fun onPause() {
+        super.onPause()
+        overridePendingTransition(0,0)
     }
 }
