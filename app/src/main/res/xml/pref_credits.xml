@@ -2,19 +2,27 @@
 
 
     <!--put credits here-->
+    <PreferenceCategory
+        android:title="@string/special_thanks_title"/>
+    <PreferenceCategory
+        android:title="@string/special_thanks_0"/>
+    <PreferenceCategory
+        android:title="@string/special_thanks_1"/>
+    <PreferenceCategory
+        android:title="@string/special_thanks_2"/>
+    <PreferenceCategory
+        android:title="@string/special_thanks_3"/>
 
-
-    <MultiSelectListPreference
-        android:defaultValue="@array/image_credits"
-        android:entries="@array/image_credits"
-        android:entryValues="@array/image_credits"
-        android:key="credits"
-        android:title="@string/image_credits_title" />
-
-    <MultiSelectListPreference
-        android:defaultValue="@array/special_thanks"
-        android:entries="@array/special_thanks"
-        android:entryValues="@array/special_thanks"
-        android:key="thanks"
-        android:title="@string/special_thanks_title" />
+    <PreferenceCategory
+        android:title="@string/image_credits_title"/>
+    <PreferenceCategory
+        android:title="@string/image_credits_0"/>
+    <PreferenceCategory
+        android:title="@string/image_credits_1"/>
+    <PreferenceCategory
+        android:title="@string/image_credits_2"/>
+    <PreferenceCategory
+        android:title="@string/image_credits_3"/>
+    <PreferenceCategory
+        android:title="@string/image_credits_4"/>
 </PreferenceScreen>

@@ -79,6 +79,7 @@ class GroupActivity : AppCompatPreferenceActivity() {
         return PreferenceFragment::class.java.name == fragmentName
                 || ReportPreferenceFragment::class.java.name == fragmentName
                 || CreditsPreferenceFragment::class.java.name == fragmentName
+                || MessagePreferenceFragment::class.java.name == fragmentName
     }
 
     /**
@@ -121,6 +122,29 @@ class GroupActivity : AppCompatPreferenceActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.pref_credits)
+            setHasOptionsMenu(true)
+
+            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            // to their values. When their values change, their summaries are
+            // updated to reflect the new value, per the Android Design
+            // guidelines.
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            val id = item.itemId
+            if (id == android.R.id.home) {
+                startActivity(Intent(activity, GroupActivity::class.java))
+                return true
+            }
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    class MessagePreferenceFragment : PreferenceFragment() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            addPreferencesFromResource(R.xml.pref_message)
             setHasOptionsMenu(true)
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences

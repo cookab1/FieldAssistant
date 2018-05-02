@@ -10,4 +10,9 @@
         android:icon="@drawable/groups"
         android:title="@string/pref_header_credits" />
 
+    <header
+        android:fragment="com.andy.fieldassistant.GroupActivity$MessagePreferenceFragment"
+        android:title="@string/comments_request_title"
+        android:summary="@string/comments_request" />
+
 </preference-headers>
