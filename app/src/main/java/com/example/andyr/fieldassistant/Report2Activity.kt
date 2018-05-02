@@ -102,7 +102,7 @@ class Report2Activity : AppCompatActivity() {
         if(data.getRecipient() != null) {
             display_default.visibility = View.INVISIBLE
             choose_recipient.visibility = View.VISIBLE
-            choose_recipient.setText(data.getRecipient())
+            display_default.setText(data.getRecipient())
         } else {
             display_default.visibility = View.VISIBLE
             choose_recipient.visibility = View.INVISIBLE
