@@ -64,22 +64,22 @@
     <string name="pref_header_settings">Configuraciones</string>
     <string name="pref_header_credits">Créditos</string>
 
-    <string name="image_credits_title">Créditos de imagen</string>
-    <string-array name="image_credits">
-        <item>Icono de la cámara creado por Daniel Bruce desde www.flaticon.com</item>
-        <item>Icono de galeria creado por Creaticca Creative Agency desde www.flaticon.com</item>
-        <item>Icono de informe creado por Designerz Base desde www.flaticon.com</item>
-        <item>Icono de créditos creado por Freepik desde www.flaticon.com</item>
-        <item>Icono de Field Assistant creado por Blake Nelson, autor de la versión de IOS de Field Assistant</item>
-    </string-array>
+    <string name="special_thanks_title">Gracias especiales a</string>
+    <string name="special_thanks_0">Matt Cook por la idea de la aplicación.</string>
+    <string name="special_thanks_1">Samaritain\'s Purse por dar a conocer la necesidad de capturar esta información en un solo lugar. Espero que sea útil para muchos más usuarios que tú.</string>
+    <string name="special_thanks_2">Chad Waters por su ayuda pensando en la creación de la aplicación.</string>
+    <string name="special_thanks_3">Blake Nelson por escribir la versión de IOS de la aplicación, diseñar el logotipo y diseñar los diseños visuales.</string>
 
-    <string name="special_thanks_title">Gracias especiales</string>
-    <string-array name="special_thanks">
-        <item>Gracias a Matt Cook por la idea de la aplicación.</item>
-        <item>Gracias a Samaritain\'s Purse por dar a conocer la necesidad de capturar esta información en un solo lugar. Espero que sea útil para muchos más usuarios que tú.</item>
-        <item>Gracias a Chad Waters por su ayuda pensando en la creación de la aplicación.</item>
-        <item>Gracias a Blake Nelson por escribir la versión de IOS de la aplicación, diseñar el logotipo y diseñar los diseños visuales.</item>
-    </string-array>
+    <string name="image_credits_title">Créditos de imagen</string>
+    <string name="image_credits_0">Icono de la cámara creado por Daniel Bruce desde www.flaticon.com</string>
+    <string name="image_credits_1">Icono de galeria creado por Creaticca Creative Agency desde www.flaticon.com</string>
+    <string name="image_credits_2">Icono de informe creado por Designerz Base desde www.flaticon.com</string>
+    <string name="image_credits_3">Icono de créditos creado por Freepik desde www.flaticon.com</string>
+    <string name="image_credits_4">Icono de Field Assistant creado por Blake Nelson, autor de la versión de IOS de Field Assistant</string>
+
+    <string name="comments_request_title">Comentarios bienvenidos</string>
+    <string name="comments_request_0">Esta aplicación se ha desarrollado con muchos usos y muchas personas en mente. Aún así, no podía pensar en todos los posibles usos y opiniones de todos los posibles usuarios.</string>
+    <string name="comments_request_1">Contácteme en andyrock.cook@gmail.com con el asunto \"Field Assistant\" y avísenme sobre las ideas, preferencias y otras personalizaciones que le gustaría ver en el futuro.</string>
 
 </resources>
 

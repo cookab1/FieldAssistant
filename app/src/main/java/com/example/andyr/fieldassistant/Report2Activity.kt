@@ -3,11 +3,9 @@ package com.andy.fieldassistant
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.location.*
@@ -16,7 +14,6 @@ import android.net.Uri
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -28,9 +25,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Switch
 import android.widget.Toast
-import java.io.IOError
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
 
@@ -68,10 +64,8 @@ class Report2Activity : AppCompatActivity() {
         setContentView(R.layout.report3)
 
         //report = Report(intent.getSerializableExtra("UUID") as UUID)
-        report = ReportSender.instance.getReport()
+        report = ReportManager.instance.getReport()
         initializeView(report)
-
-        ReportManager.get.setContext(this)
 
         change_button.setOnClickListener {
             val settings = PreferenceManager.getDefaultSharedPreferences(this)
@@ -95,10 +89,7 @@ class Report2Activity : AppCompatActivity() {
     fun initializeView(data : Report) {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
         //set the image
-        if(intent.getIntExtra("image_code", 0) == IMAGE_GALLERY_REQUEST_CODE)
-            field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
-        else
-            field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
+        field_image_3.setImageBitmap(rotateImage(BitmapSender.instance.getBitmap()!!))
 
         //if there's a message, set the message
         if(data.getMessage() != null)
@@ -260,7 +251,7 @@ class Report2Activity : AppCompatActivity() {
         return locationString
     }
 
-    fun askToSetDefaultRecipient() {
+    private fun askToSetDefaultRecipient() {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
 
         var message = "Make "
@@ -362,31 +353,29 @@ class Report2Activity : AppCompatActivity() {
     }
 
     private fun rotateImage(bitmap: Bitmap): Bitmap {
-        val fileLocation = ReportManager.get.getPhotoFile(report).absolutePath
-        //val fileLocation = getRealPathFromURI(ReportSender.instance.getReport().getUri())
+        val fileLocation = ReportManager.instance.getPhotoFile(this, report).absolutePath
         var exif: ExifInterface? = null
         try {
             exif = ExifInterface(fileLocation)
         } catch (ex: IOException) {
             ex.printStackTrace()
+            return bitmap
+        } catch (ex: FileNotFoundException) {
+            ex.printStackTrace()
+            Toast.makeText(this, "Image File Not Found", Toast.LENGTH_SHORT).show()
+            return bitmap
         }
-        val orientation = exif!!.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+
+        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
         val matrix: Matrix = Matrix()
         when(orientation) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
-            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.setRotate(180f)
-            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
         }
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
-    /*
-    private fun getRealPathFromURI(uri: Uri?): String {
-        val cursor: Cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx)
-    }
-    */
+
 
     private fun messageListener() {
         field_message_3.addTextChangedListener(object : TextWatcher {

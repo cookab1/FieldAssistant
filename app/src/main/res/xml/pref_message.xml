@@ -2,6 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/comments_request"/>
+        android:title="@string/comments_request_0"/>
+    <PreferenceCategory
+        android:title="@string/comments_request_1"/>
 
 </PreferenceScreen>

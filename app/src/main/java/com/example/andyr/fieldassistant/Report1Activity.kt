@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.os.Environment.getExternalStoragePublicDirectory
-import android.os.Handler
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.view.Menu
@@ -36,8 +35,6 @@ class Report1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report1)
-
-        ReportManager.get.setContext(this)
 
         field_camera.setOnClickListener { takePictureWithCamera() }
         field_photos.setOnClickListener { openPhotos() }
@@ -68,7 +65,6 @@ class Report1Activity : AppCompatActivity() {
                 //hearing back from the image gallery
                 val imageUri: Uri = data!!.data
                 report.setUri(imageUri)
-
                 val inputStream: InputStream
 
                 try {
@@ -83,7 +79,7 @@ class Report1Activity : AppCompatActivity() {
             } else if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
                 image = BitmapFactory.decodeFile(photoFile!!.absolutePath)
             }
-            ReportSender.instance.setReport(report)
+            ReportManager.instance.setReport(report)
             BitmapSender.instance.setBitmap(image)
         }
 
@@ -91,8 +87,6 @@ class Report1Activity : AppCompatActivity() {
 
         intent = Intent(this, Report2Activity::class.java)
 
-        ReportManager.get.addReport(report)
-        intent.putExtra("UUID", report.getId())
         intent.putExtra("image_code", requestCode)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -106,6 +100,7 @@ class Report1Activity : AppCompatActivity() {
         val pictureDirectoryPath: String = pictureDirectory.path
 
         val photoUri: Uri = Uri.parse(pictureDirectoryPath)
+        report.setUri(photoUri)
 
         photoPickerIntent.setDataAndType(photoUri, "image/*")
 
@@ -117,13 +112,12 @@ class Report1Activity : AppCompatActivity() {
         // create Intent to take a picture and return control to the calling application
         val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        photoFile = ReportManager.get.getPhotoFile(report)
+        photoFile = ReportManager.instance.getPhotoFile(this, report)
 
         if(photoFile != null) {
             val photoUri: Uri = FileProvider.getUriForFile(this,
                     "com.andy.fieldassistant", photoFile!!)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-            report.setUri(photoUri)
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivityForResult(intent, TAKE_PHOTO_REQUEST_CODE)

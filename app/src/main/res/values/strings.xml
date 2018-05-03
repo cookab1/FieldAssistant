@@ -77,7 +77,8 @@
     <string name="image_credits_4">5. Field Assistant icon made by Blake Nelson, the author of the IOS version of Field Assistant</string>
 
     <string name="comments_request_title">Comments Welcome</string>
-    <string name="comments_request">This App has been developed with many uses and many people in mind. Even still, I could not think of all the possible uses and opinions of all the possible users.\nPlease contact me at andyrock.cook@gmail.com with the subject "Field Assistant" and let me know of ideas, preferences, and other customizations you would like to see in the future.</string>
+    <string name="comments_request_0">This App has been developed with many uses and many people in mind. Even still, I could not think of all the possible uses and opinions of all the possible users.</string>
+    <string name="comments_request_1">Please contact me at andyrock.cook@gmail.com with the subject \"Field Assistant\" and let me know of ideas, preferences, and other customizations you would like to see in the future.</string>
 
 </resources>
 

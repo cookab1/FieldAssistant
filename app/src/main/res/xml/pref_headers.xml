@@ -13,6 +13,6 @@
     <header
         android:fragment="com.andy.fieldassistant.GroupActivity$MessagePreferenceFragment"
         android:title="@string/comments_request_title"
-        android:summary="@string/comments_request" />
+        android:summary="@string/comments_request_0" />
 
 </preference-headers>
