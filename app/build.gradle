@@ -10,9 +10,9 @@ android {
         applicationId 'com.andy.fieldassistant'
         minSdkVersion 22
         targetSdkVersion 27
-        versionName 'Field Assistant: With French and Spanish'
+        versionName 'Field Assistant: With Finishing Touches'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 6
+        versionCode 7
     }
     buildTypes {
         release {

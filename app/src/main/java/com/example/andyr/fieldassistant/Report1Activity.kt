@@ -89,7 +89,7 @@ class Report1Activity : AppCompatActivity() {
 
         intent.putExtra("image_code", requestCode)
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent)
     }
 
