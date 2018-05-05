@@ -19,6 +19,22 @@
     <string name="no_wifi_text">Wifi nécessaire pour obtenir la ville et le pays.</string>
     <string name="no_default_set">Aucun jeu par défaut</string>
 
+    <!--Toast Text-->
+    <string name="location_enabled">Emplacement Activé</string>
+    <string name="location_disabled">Emplacement Désactivé</string>
+    <string name="services_disabled">Services de Localisation Désactivés</string>
+    <string name="file_not_found">Fichier d\'Image Introuvable</string>
+    <string name="permission_not_granted">Autorisation non Accordée</string>
+    <string name="default_recipient_set">Ensemble de destinataires par défaut</string>
+    <string name="default_recipient_not_set">Le destinataire par défaut n\'est pas défini</string>
+
+    <!--Default Recipient Dialog Box Strings-->
+    <string name="dialogue_title">Définir le Destinataire par Défaut</string>
+    <string name="dialogue_prompt_0">Rendre le destinataire par défaut\ </string>
+    <string name="dialogue_prompt_1">.</string>
+    <string name="dialogue_yes">Oui</string>
+    <string name="dialogue_no">Non</string>
+
     <!--<string name="pref_title_add_friends_to_messages">Add Group</string>-->
 
     <string name="title_activity_group">Parametres</string>
@@ -62,21 +78,21 @@
     <string name="subject_format_title">Ligne par défaut</string>
     <string name="subject_format_hint">Définir le sujet par défaut</string>
 
-    <string name="pref_header_credits">About</string>
+    <string name="pref_header_credits">Crédits</string>
 
 
     <string name="special_thanks_title">Remerciement spécial à</string>
-    <string name="special_thanks_0">1. Matt Cook pour l\'idée de l\'application.</string>
-    <string name="special_thanks_1">2. Samaritain\'s Purse pour avoir fait connaître la nécessité de saisir cette information en un seul endroit. J\'espère qu\'il est utile à beaucoup plus d\'utilisateurs que vous.</string>
-    <string name="special_thanks_2">3. Chad Waters pour votre aide en pensant à la création de l\'application.</string>
-    <string name="special_thanks_3">4. Blake Nelson d\'avoir écrit la version IOS de l\'application, d\'avoir conçu le logo et d\'avoir conçu les mises en page visuelles.</string>
+    <string name="special_thanks_0">\ \ \ \ \ \ \ Matt Cook pour l\'idée de l\'application.</string>
+    <string name="special_thanks_1">\ \ \ \ \ \ \ Samaritain\'s Purse pour avoir fait connaître la nécessité de saisir cette information en un seul endroit. J\'espère qu\'il est utile à beaucoup plus d\'utilisateurs que vous.</string>
+    <string name="special_thanks_2">\ \ \ \ \ \ \ Chad Waters pour votre aide en pensant à la création de l\'application.</string>
+    <string name="special_thanks_3">\ \ \ \ \ \ \ Blake Nelson d\'avoir écrit la version IOS de l\'application, d\'avoir conçu le logo et d\'avoir conçu les mises en page visuelles.</string>
 
     <string name="image_credits_title">Crédits d\'image</string>
-    <string name="image_credits_0">1. Icône de caméra faite par Daniel Bruce de www.flaticon.com</string>
-    <string name="image_credits_1">2. Icône de galerie faite par Creaticca Creative Agency à partir de www.flaticon.com</string>
-    <string name="image_credits_2">3. Icône de rapport réalisée par Designerz Base à partir de www.flaticon.com www.flaticon.com</string>
-    <string name="image_credits_3">4. Crédits icon réalisé par Freepik sur www.flaticon.com</string>
-    <string name="image_credits_4">5. Icône Field Assistant faite par Blake Nelson, l\'auteur de la version IOS de Field Assistant</string>
+    <string name="image_credits_0">\ \ \ \ \ \ \ Icône de caméra faite par Daniel Bruce de www.flaticon.com</string>
+    <string name="image_credits_1">\ \ \ \ \ \ \ Icône de galerie faite par Creaticca Creative Agency à partir de www.flaticon.com</string>
+    <string name="image_credits_2">\ \ \ \ \ \ \ Icône de rapport réalisée par Designerz Base à partir de www.flaticon.com www.flaticon.com</string>
+    <string name="image_credits_3">\ \ \ \ \ \ \ Crédits icon réalisé par Freepik sur www.flaticon.com</string>
+    <string name="image_credits_4">\ \ \ \ \ \ \ Icône Field Assistant faite par Blake Nelson, l\'auteur de la version IOS de Field Assistant</string>
 
     <string name="comments_request_title">Commentaires Bienvenue</string>
     <string name="comments_request_0">Cette application a été développée avec de nombreux usages et beaucoup de gens en tête. Même encore, je ne pouvais pas penser à toutes les utilisations possibles et les opinions de tous les utilisateurs possibles.</string>

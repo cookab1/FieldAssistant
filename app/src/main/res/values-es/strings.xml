@@ -19,6 +19,21 @@
     <string name="no_wifi_text">Wifi necesario para obtener la ciudad y el país.</string>
     <string name="no_default_set">Sin conjunto predeterminado</string>
 
+    <!--Toast Text-->
+    <string name="location_enabled">Ubicación Habilitada</string>
+    <string name="location_disabled">Ubicación Desactivada</string>
+    <string name="services_disabled">Servicios de Ubicación Desactivados</string>
+    <string name="file_not_found">Archivo de Imagen no Encontrado</string>
+    <string name="permission_not_granted">Permiso no Otorgado</string>
+    <string name="default_recipient_set">Conjunto de destinatarios predeterminados</string>
+    <string name="default_recipient_not_set">El destinatario predeterminado no está establecido</string>
+
+    <!--Default Recipient Dialog Box Strings-->
+    <string name="dialogue_title">Establecer Destinatario Predeterminado</string>
+    <string name="dialogue_prompt_0">Hacer que el destinatario predeterminado sea\ </string>
+    <string name="dialogue_prompt_1">.</string>
+    <string name="dialogue_yes">Sí</string>
+    <string name="dialogue_no">No</string>
 
     <string name="title_activity_group">Configuraciones</string>
 
@@ -65,17 +80,17 @@
     <string name="pref_header_credits">Créditos</string>
 
     <string name="special_thanks_title">Gracias especiales a</string>
-    <string name="special_thanks_0">Matt Cook por la idea de la aplicación.</string>
-    <string name="special_thanks_1">Samaritain\'s Purse por dar a conocer la necesidad de capturar esta información en un solo lugar. Espero que sea útil para muchos más usuarios que tú.</string>
-    <string name="special_thanks_2">Chad Waters por su ayuda pensando en la creación de la aplicación.</string>
-    <string name="special_thanks_3">Blake Nelson por escribir la versión de IOS de la aplicación, diseñar el logotipo y diseñar los diseños visuales.</string>
+    <string name="special_thanks_0">\ \ \ \ \ \ \ Matt Cook por la idea de la aplicación.</string>
+    <string name="special_thanks_1">\ \ \ \ \ \ \ Samaritain\'s Purse por dar a conocer la necesidad de capturar esta información en un solo lugar. Espero que sea útil para muchos más usuarios que tú.</string>
+    <string name="special_thanks_2">\ \ \ \ \ \ \ Chad Waters por su ayuda pensando en la creación de la aplicación.</string>
+    <string name="special_thanks_3">\ \ \ \ \ \ \ Blake Nelson por escribir la versión de IOS de la aplicación, diseñar el logotipo y diseñar los diseños visuales.</string>
 
     <string name="image_credits_title">Créditos de imagen</string>
-    <string name="image_credits_0">Icono de la cámara creado por Daniel Bruce desde www.flaticon.com</string>
-    <string name="image_credits_1">Icono de galeria creado por Creaticca Creative Agency desde www.flaticon.com</string>
-    <string name="image_credits_2">Icono de informe creado por Designerz Base desde www.flaticon.com</string>
-    <string name="image_credits_3">Icono de créditos creado por Freepik desde www.flaticon.com</string>
-    <string name="image_credits_4">Icono de Field Assistant creado por Blake Nelson, autor de la versión de IOS de Field Assistant</string>
+    <string name="image_credits_0">\ \ \ \ \ \ \ Icono de la cámara creado por Daniel Bruce desde www.flaticon.com</string>
+    <string name="image_credits_1">\ \ \ \ \ \ \ Icono de galeria creado por Creaticca Creative Agency desde www.flaticon.com</string>
+    <string name="image_credits_2">\ \ \ \ \ \ \ Icono de informe creado por Designerz Base desde www.flaticon.com</string>
+    <string name="image_credits_3">\ \ \ \ \ \ \ Icono de créditos creado por Freepik desde www.flaticon.com</string>
+    <string name="image_credits_4">\ \ \ \ \ \ \ Icono de Field Assistant creado por Blake Nelson, autor de la versión de IOS de Field Assistant</string>
 
     <string name="comments_request_title">Comentarios bienvenidos</string>
     <string name="comments_request_0">Esta aplicación se ha desarrollado con muchos usos y muchas personas en mente. Aún así, no podía pensar en todos los posibles usos y opiniones de todos los posibles usuarios.</string>

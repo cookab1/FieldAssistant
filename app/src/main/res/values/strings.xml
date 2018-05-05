@@ -18,6 +18,22 @@
     <string name="no_wifi_text">Wifi needed to get city and country.</string>
     <string name="no_default_set">No default set</string>
 
+    <!--Toast Text-->
+    <string name="location_enabled">Location Enabled</string>
+    <string name="location_disabled">Location Disabled</string>
+    <string name="services_disabled">Location Services Disabled</string>
+    <string name="file_not_found">Image File Not Found</string>
+    <string name="permission_not_granted">Permission Not Granted</string>
+    <string name="default_recipient_set">Default Recipient Set</string>
+    <string name="default_recipient_not_set">Default Recipient Not Set</string>
+
+    <!--Default Recipient Dialog Box Strings-->
+    <string name="dialogue_title">Set Default Recipient</string>
+    <string name="dialogue_prompt_0">Make\ </string>
+    <string name="dialogue_prompt_1">\ default recipient.</string>
+    <string name="dialogue_yes">Yes</string>
+    <string name="dialogue_no">No</string>
+
 
     <string name="title_activity_group">Settings</string>
 
@@ -64,17 +80,17 @@
     <string name="pref_header_credits">Credits</string>
 
     <string name="special_thanks_title">Special Thanks To</string>
-    <string name="special_thanks_0">1. Matt Cook for the idea of the app.</string>
-    <string name="special_thanks_1">2. Samaritain\'s Purse for making known the need to capture this information in one place. I hope it is useful to many more users than you.</string>
-    <string name="special_thanks_2">3. Chad Waters for your help thinking through the creation of the app.</string>
-    <string name="special_thanks_3">4. Blake Nelson for writing the IOS version of the app, designing the logo, and designing the visual layouts.</string>
+    <string name="special_thanks_0">\ \ \ \ \ \ \ Matt Cook for the idea of the app.</string>
+    <string name="special_thanks_1">\ \ \ \ \ \ \ Samaritain\'s Purse for making known the need to capture this information in one place. I hope it is useful to many more users than you.</string>
+    <string name="special_thanks_2">\ \ \ \ \ \ \ Chad Waters for your help thinking through the creation of the app.</string>
+    <string name="special_thanks_3">\ \ \ \ \ \ \ Blake Nelson for writing the IOS version of the app, designing the logo, and designing the visual layouts.</string>
 
     <string name="image_credits_title">Image Credits</string>
-    <string name="image_credits_0">1. Camera icon made by Daniel Bruce from www.flaticon.com</string>
-    <string name="image_credits_1">2. Photos icon made by Creaticca Creative Agency from www.flaticon.com</string>
-    <string name="image_credits_2">3. Report icon made by Designerz Base from www.flaticon.com</string>
-    <string name="image_credits_3">4. Credits icon made by Freepik from www.flaticon.com</string>
-    <string name="image_credits_4">5. Field Assistant icon made by Blake Nelson, the author of the IOS version of Field Assistant</string>
+    <string name="image_credits_0">\ \ \ \ \ \ \ Camera icon made by Daniel Bruce from www.flaticon.com</string>
+    <string name="image_credits_1">\ \ \ \ \ \ \ Photos icon made by Creaticca Creative Agency from www.flaticon.com</string>
+    <string name="image_credits_2">\ \ \ \ \ \ \ Report icon made by Designerz Base from www.flaticon.com</string>
+    <string name="image_credits_3">\ \ \ \ \ \ \ Credits icon made by Freepik from www.flaticon.com</string>
+    <string name="image_credits_4">\ \ \ \ \ \ \ Field Assistant icon made by Blake Nelson, the author of the IOS version of Field Assistant</string>
 
     <string name="comments_request_title">Comments Welcome</string>
     <string name="comments_request_0">This App has been developed with many uses and many people in mind. Even still, I could not think of all the possible uses and opinions of all the possible users.</string>

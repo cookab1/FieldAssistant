@@ -98,11 +98,14 @@ class Report2Activity : AppCompatActivity() {
         if(data.getRecipient() != null) {
             display_default.visibility = View.INVISIBLE
             choose_recipient.visibility = View.VISIBLE
-            display_default.setText(data.getRecipient())
+            choose_recipient.setText(data.getRecipient())
+            display_default.setText(settings.getString("default_recipient", R.string.no_default_set.toString()))
+            change_button.setText(R.string.return_default)
         } else {
             display_default.visibility = View.VISIBLE
             choose_recipient.visibility = View.INVISIBLE
             report.setRecipient(settings.getString("default_recipient", "No Default Set"))
+            change_button.setText(R.string.change_recipient)
         }
         display_default.setText(settings.getString("default_recipient", R.string.no_default_set.toString()))
         if(display_default.text.toString().equals(R.string.no_default_set.toString()))
@@ -254,20 +257,22 @@ class Report2Activity : AppCompatActivity() {
     private fun askToSetDefaultRecipient() {
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
 
-        var message = "Make "
+        invisible_text.setText(R.string.dialogue_prompt_0)
+        var message: String = invisible_text.text.toString()
         message += choose_recipient.text.toString()
-        message += " default recipient."
+        invisible_text.setText(R.string.dialogue_prompt_1)
+        message += invisible_text.text.toString()
 
         // Initialize a new instance of
         val builder = AlertDialog.Builder(this)
 
-        builder.setTitle("Set Default Recipient")
+        builder.setTitle(R.string.dialogue_title)
         builder.setMessage(message)
 
         // Set a positive button and its click listener on alert dialog
-        builder.setPositiveButton("YES"){dialog, which ->
+        builder.setPositiveButton(R.string.dialogue_yes){dialog, which ->
             // Do something when user press the positive button
-            Toast.makeText(applicationContext,"Default Recipient Set",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,R.string.default_recipient_set,Toast.LENGTH_SHORT).show()
 
             //set default recipient
             val editor: SharedPreferences.Editor = settings.edit()
@@ -279,8 +284,8 @@ class Report2Activity : AppCompatActivity() {
         }
 
         // Display a negative button on alert dialog
-        builder.setNegativeButton("No"){dialog, which ->
-            Toast.makeText(applicationContext,"Default Recipient Not Set",Toast.LENGTH_SHORT).show()
+        builder.setNegativeButton(R.string.dialogue_no){dialog, which ->
+            Toast.makeText(applicationContext,R.string.default_recipient_not_set,Toast.LENGTH_SHORT).show()
             dialogCalled = true
             send()
         }
@@ -294,7 +299,7 @@ class Report2Activity : AppCompatActivity() {
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission not yet Granted", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.permission_not_granted, Toast.LENGTH_LONG).show()
             ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     LOCATION_REQUEST_CODE)
@@ -305,13 +310,12 @@ class Report2Activity : AppCompatActivity() {
             setLocationText()
         } catch (ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available")
-            Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
         }
     }
 
     fun setLocationText() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission not yet Granted", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.permission_not_granted, Toast.LENGTH_LONG).show()
             ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 LOCATION_REQUEST_CODE)
@@ -331,7 +335,7 @@ class Report2Activity : AppCompatActivity() {
         if(requestCode == LOCATION_REQUEST_CODE){
             if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //accepted
-                Toast.makeText(this, "Location Enabled", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.location_enabled, Toast.LENGTH_LONG).show()
 
                 try {
                     // Request location updates
@@ -343,11 +347,11 @@ class Report2Activity : AppCompatActivity() {
                     }
                 } catch(ex: SecurityException) {
                     Log.d("myTag", "Security Exception, no location available")
-                    Toast.makeText(this, "Location Services Disabled", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, R.string.services_disabled, Toast.LENGTH_LONG).show()
                 }
             } else {
                 //denied
-                Toast.makeText(this, "Location Disabled", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.location_disabled, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -362,7 +366,7 @@ class Report2Activity : AppCompatActivity() {
             return bitmap
         } catch (ex: FileNotFoundException) {
             ex.printStackTrace()
-            Toast.makeText(this, "Image File Not Found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.file_not_found, Toast.LENGTH_SHORT).show()
             return bitmap
         }
 
