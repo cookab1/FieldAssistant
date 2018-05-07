@@ -100,7 +100,7 @@ class Report1Activity : AppCompatActivity() {
         val pictureDirectoryPath: String = pictureDirectory.path
 
         val photoUri: Uri = Uri.parse(pictureDirectoryPath)
-        report.setUri(photoUri)
+        //report.setUri(photoUri)
 
         photoPickerIntent.setDataAndType(photoUri, "image/*")
 
@@ -117,6 +117,7 @@ class Report1Activity : AppCompatActivity() {
         if(photoFile != null) {
             val photoUri: Uri = FileProvider.getUriForFile(this,
                     "com.andy.fieldassistant", photoFile!!)
+            report.setUri(photoUri)
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
